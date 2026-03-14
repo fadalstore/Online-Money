@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Fadal Store</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #2c3e50;
+        }
+        .login-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .login-box {
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-box h1 { color: #667eea; font-size: 2rem; margin-bottom: 8px; }
+        .login-box p { color: #888; margin-bottom: 30px; }
+        .login-box input {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            outline: none;
+            transition: border 0.3s;
+        }
+        .login-box input:focus { border-color: #667eea; }
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: opacity 0.3s;
+        }
+        .btn:hover { opacity: 0.9; }
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #667eea;
+            border: 2px solid #667eea;
+            margin-top: 10px;
+        }
+        .btn-secondary:hover { background: #667eea; color: #fff; }
+        .error-msg { color: #e74c3c; margin-top: 12px; font-weight: 600; }
+
+        #admin-panel { display: none; }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        header h1 { font-size: 1.8rem; }
+        header button {
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+            border: 2px solid rgba(255,255,255,0.5);
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .admin-container {
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        .tab {
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            border: 2px solid #667eea;
+            color: #667eea;
+            background: #fff;
+            transition: all 0.3s;
+        }
+        .tab.active { background: #667eea; color: #fff; }
+        .panel { display: none; }
+        .panel.active { display: block; }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+        .card h2 { color: #667eea; margin-bottom: 20px; font-size: 1.4rem; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; color: #444; }
+        input[type="text"], input[type="url"], textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+            margin-bottom: 18px;
+            outline: none;
+            transition: border 0.3s;
+        }
+        input:focus, textarea:focus, select:focus { border-color: #667eea; }
+        textarea { min-height: 120px; resize: vertical; }
+        .section-builder { background: #f8f9ff; border: 2px dashed #667eea; border-radius: 8px; padding: 20px; margin-bottom: 18px; }
+        .section-builder h4 { color: #667eea; margin-bottom: 12px; }
+        .remove-btn {
+            background: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            float: right;
+            margin-top: -5px;
+        }
+        .add-section-btn {
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        .add-section-btn:hover { background: #219a52; }
+        #output-area {
+            background: #1e1e2e;
+            color: #a6e22e;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 15px;
+            display: none;
+        }
+        .copy-btn {
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+        }
+        .article-list { list-style: none; }
+        .article-list li {
+            background: #f8f9ff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .article-list li a { color: #667eea; font-weight: 600; text-decoration: none; }
+        .article-list li a:hover { text-decoration: underline; }
+        .badge { background: #667eea; color: #fff; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; }
+        .info-box {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .success-msg { color: #27ae60; font-weight: 600; margin-top: 10px; display:none; }
+        .img-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .img-option {
+            border: 3px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border 0.2s;
+        }
+        .img-option.selected { border-color: #667eea; }
+        .img-option img { width: 100%; height: 90px; object-fit: cover; display: block; }
+    </style>
+</head>
+<body>
+
+<div class="login-screen" id="login-screen">
+    <div class="login-box">
+        <h1>⭐ Fadal Store</h1>
+        <p>Admin Panel - Gal Koodka Sirta ah</p>
+        <input type="password" id="password-input" placeholder="Koodka Sirta ah..." onkeydown="if(event.key==='Enter') checkPassword()">
+        <button class="btn" onclick="checkPassword()">Gal Admin Panel</button>
+        <div class="error-msg" id="error-msg"></div>
+    </div>
+</div>
+
+<div id="admin-panel">
+    <header>
+        <h1>⭐ Fadal Store Admin</h1>
+        <button onclick="logout()">Ka Bax</button>
+    </header>
+
+    <div class="admin-container">
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('new-post')">✏️ Post Cusub</div>
+            <div class="tab" onclick="showTab('all-posts')">📋 Posts-ka Jira</div>
+            <div class="tab" onclick="showTab('sitemap-info')">🗺️ Sitemap</div>
+        </div>
+
+        <div class="panel active" id="new-post">
+            <div class="card">
+                <h2>✏️ Samee Post/Article Cusub</h2>
+                <div class="info-box">
+                    💡 <strong>Sida loo isticmaalo:</strong> Buuxi foomka hoose, ka dibna dhagsii "Samee HTML". Koodhka la sameeyay ka nuqul oo ku kaydi file cusub sida <code>article31.html</code>.
+                </div>
+
+                <label>Cinwaan (Title) *</label>
+                <input type="text" id="post-title" placeholder="Tusaale: Side Hustle Guide - Qaybta 31">
+
+                <label>URL File Name *</label>
+                <input type="text" id="post-filename" placeholder="Tusaale: article31.html">
+
+                <label>Sharaxaad (Description) *</label>
+                <input type="text" id="post-description" placeholder="Sharaxaad gaaban oo article-ka ku saabsan...">
+
+                <label>Sawirka Hore (Featured Image URL)</label>
+                <div class="img-grid" id="img-grid"></div>
+                <input type="url" id="post-image" placeholder="Ama geli URL sawir kale...">
+
+                <label>Qoraha / Waqtiga Akhrista</label>
+                <input type="text" id="post-author" placeholder="Tusaale: Ganacsiga Online-ka | 8-10 min">
+
+                <div id="sections-container"></div>
+
+                <button class="add-section-btn" onclick="addSection()">+ Ku Dar Qaybta Cusub</button>
+
+                <label>Takliifaha Muhiimsan (Key Takeaways) - hal kasta sadar gaar ah</label>
+                <textarea id="post-takeaways" placeholder="Start small and build consistency&#10;Focus on quality&#10;Learn continuously"></textarea>
+
+                <button class="btn" onclick="generateHTML()">🔨 Samee HTML</button>
+                <div class="success-msg" id="gen-success">✅ HTML waa la sameeyay! Nuqul ka qaado.</div>
+                <button class="copy-btn" id="copy-btn" onclick="copyHTML()">📋 Nuqul HTML</button>
+                <div id="output-area"></div>
+            </div>
+        </div>
+
+        <div class="panel" id="all-posts">
+            <div class="card">
+                <h2>📋 Articles-ka Jira (30 Article)</h2>
+                <ul class="article-list" id="article-list"></ul>
+            </div>
+        </div>
+
+        <div class="panel" id="sitemap-info">
+            <div class="card">
+                <h2>🗺️ Macluumaadka Sitemap</h2>
+                <div class="info-box">
+                    <strong>Sitemap URL-ka:</strong><br>
+                    <code>https://fadalstore.github.io/Online-Money/sitemap.xml</code>
+                    <br><br>
+                    <strong>Sida loo cusboonaysiiyo Google Search Console:</strong><br>
+                    1. Tag <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a><br>
+                    2. Dooro "Sitemaps" menu-ga bidix<br>
+                    3. Geli: <code>sitemap.xml</code><br>
+                    4. Dhagsii "Submit"
+                </div>
+                <h3 style="color:#667eea; margin-bottom: 15px;">Articles ku jira Sitemap</h3>
+                <ul class="article-list" id="sitemap-list"></ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const ADMIN_PASSWORD = 'fadal2024';
+
+const IMAGES = [
+    'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=450&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=800&h=450&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=800&h=450&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=450&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=450&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=450&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&h=450&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=450&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=450&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=450&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&h=450&fit=crop&q=80',
+];
+
+let selectedImage = IMAGES[0];
+let sectionCount = 0;
+
+function checkPassword() {
+    const pw = document.getElementById('password-input').value;
+    if (pw === ADMIN_PASSWORD) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('admin-panel').style.display = 'block';
+        initAdmin();
+    } else {
+        document.getElementById('error-msg').textContent = '❌ Koodka sirta ah waa khalad. Isku day mar kale.';
+    }
+}
+
+function logout() {
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('admin-panel').style.display = 'none';
+    document.getElementById('password-input').value = '';
+}
+
+function showTab(tab) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById(tab).classList.add('active');
+}
+
+function initAdmin() {
+    buildImageGrid();
+    buildArticleList();
+    addSection();
+}
+
+function buildImageGrid() {
+    const grid = document.getElementById('img-grid');
+    grid.innerHTML = '';
+    IMAGES.slice(0,6).forEach((img, i) => {
+        const div = document.createElement('div');
+        div.className = 'img-option' + (i===0?' selected':'');
+        div.onclick = () => selectImage(img, div);
+        div.innerHTML = `<img src="${img}" alt="Sawir ${i+1}" loading="lazy">`;
+        grid.appendChild(div);
+        if (i === 0) {
+            selectedImage = img;
+            document.getElementById('post-image').value = img;
+        }
+    });
+}
+
+function selectImage(url, el) {
+    document.querySelectorAll('.img-option').forEach(d => d.classList.remove('selected'));
+    el.classList.add('selected');
+    selectedImage = url;
+    document.getElementById('post-image').value = url;
+}
+
+function addSection() {
+    sectionCount++;
+    const id = sectionCount;
+    const container = document.getElementById('sections-container');
+    const div = document.createElement('div');
+    div.className = 'section-builder';
+    div.id = `section-${id}`;
+    div.innerHTML = `
+        <h4>📝 Qaybta ${id} <button class="remove-btn" onclick="removeSection(${id})">Tirtir</button></h4>
+        <label>Cinwaan Qaybta</label>
+        <input type="text" id="s${id}-title" placeholder="Tusaale: Maxaa ah Freelancing?">
+        <label>Qoraalka Qaybta</label>
+        <textarea id="s${id}-content" placeholder="Geli qoraalka qaybtan..."></textarea>
+        <label>Sawirka Qaybta (URL - Ikhtiyaari)</label>
+        <input type="url" id="s${id}-img" placeholder="https://images.unsplash.com/...">
+    `;
+    container.appendChild(div);
+}
+
+function removeSection(id) {
+    const el = document.getElementById(`section-${id}`);
+    if (el) el.remove();
+}
+
+function generateHTML() {
+    const title = document.getElementById('post-title').value.trim();
+    const filename = document.getElementById('post-filename').value.trim();
+    const desc = document.getElementById('post-description').value.trim();
+    const imgUrl = document.getElementById('post-image').value.trim() || selectedImage;
+    const author = document.getElementById('post-author').value.trim() || 'Fadal Store | 8-10 min';
+    const takeawaysRaw = document.getElementById('post-takeaways').value.trim();
+
+    if (!title || !filename) {
+        alert('Fadlan geli Cinwaan iyo File Name!');
+        return;
+    }
+
+    const canonicalUrl = `https://fadalstore.github.io/Online-Money/${filename}`;
+
+    let sectionsHTML = '';
+    for (let i = 1; i <= sectionCount; i++) {
+        const el = document.getElementById(`section-${i}`);
+        if (!el) continue;
+        const sTitle = document.getElementById(`s${i}-title`).value.trim();
+        const sContent = document.getElementById(`s${i}-content`).value.trim();
+        const sImg = document.getElementById(`s${i}-img`).value.trim();
+        if (sTitle || sContent) {
+            sectionsHTML += `
+    <h3>${sTitle}</h3>
+    <p>${sContent.replace(/\n/g, '</p><p>')}</p>`;
+            if (sImg) {
+                sectionsHTML += `
+    <div class="article-image">
+      <img src="${sImg}" alt="${sTitle}" loading="lazy" style="width:100%; height:auto; border-radius:8px; margin:15px 0; object-fit:cover; max-height:350px;">
+    </div>`;
+            }
+        }
+    }
+
+    let takeawaysHTML = '';
+    if (takeawaysRaw) {
+        const items = takeawaysRaw.split('\n').filter(l => l.trim());
+        takeawaysHTML = `
+            <div style="background:#fff3cd; border-left:4px solid #ff9800; padding:20px; margin:30px 0; border-radius:6px;">
+                <h4 style="color:#ff9800; margin-top:0;">💡 Key Takeaways</h4>
+                <ul>
+                    ${items.map(i => `<li>${i.trim()}</li>`).join('\n                    ')}
+                </ul>
+            </div>`;
+    }
+
+    const html = `<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title} | Fadal Store</title>
+    <meta name="description" content="${desc}">
+    <link rel="canonical" href="${canonicalUrl}">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="${title} | Fadal Store">
+    <meta property="og:description" content="${desc}">
+    <meta property="og:image" content="${imgUrl}">
+    <meta property="og:url" content="${canonicalUrl}">
+    <meta property="og:site_name" content="Fadal Store">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${title} | Fadal Store">
+    <meta name="twitter:description" content="${desc}">
+    <meta name="twitter:image" content="${imgUrl}">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.8; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: #2c3e50; padding: 0; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 2rem 0; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        header h1 { margin: 0; font-size: 2.5rem; font-weight: 700; }
+        header p { margin: 10px 0 0 0; opacity: 0.95; font-size: 1.1rem; }
+        nav { background: rgba(0,0,0,0.1); padding: 15px 0; text-align: center; position: sticky; top: 0; z-index: 100; }
+        nav a { color: #fff; text-decoration: none; margin: 0 20px; font-weight: 600; transition: opacity 0.3s; }
+        nav a:hover { opacity: 0.8; text-decoration: underline; }
+        .container { max-width: 850px; margin: 30px auto; padding: 30px; background: #fff; border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); }
+        article h2 { color: #667eea; font-size: 2rem; margin: 30px 0 25px 0; padding-bottom: 15px; border-bottom: 3px solid #667eea; }
+        article h3 { color: #764ba2; font-size: 1.4rem; margin: 25px 0 15px 0; }
+        article p { margin: 15px 0; text-align: justify; line-height: 1.9; }
+        article ul, article ol { margin: 15px 0 15px 30px; line-height: 2; }
+        article li { margin: 8px 0; }
+        .adsense-placeholder { background: linear-gradient(135deg, #e9ecef 0%, #f8f9fa 100%); border: 2px dashed #667eea; text-align: center; padding: 40px 20px; margin: 30px 0; color: #667eea; font-weight: bold; border-radius: 8px; font-size: 1.1rem; }
+        footer { background: #2c3e50; color: #fff; text-align: center; padding: 20px 0; margin-top: 50px; }
+        footer p { margin: 10px 0; }
+        footer a { color: #667eea; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+        a { color: #667eea; text-decoration: none; font-weight: 500; }
+        a:hover { text-decoration: underline; color: #764ba2; }
+        .back-link { display: inline-block; margin-bottom: 25px; padding: 12px 20px; background: #f0f0f0; border-radius: 6px; border: 2px solid #667eea; color: #667eea; font-weight: 600; transition: all 0.3s; }
+        .back-link:hover { background: #667eea; color: #fff; text-decoration: none; }
+        .article-meta { background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0; font-size: 0.9rem; color: #666; }
+        .featured-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px; margin: 20px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fadal Store</h1>
+        <p>Xaruntaada Xorriyadda Maaliyadeed iyo Ganacsiga Online-ka</p>
+    </header>
+    <nav>
+        <a href="index.html">Bogga Hore</a>
+        <a href="about.html">Nagu Saabsan</a>
+        <a href="contact.html">Nala Soo Xiriir</a>
+    </nav>
+    <div class="container">
+        <a href="index.html" class="back-link">&larr; Ku noqo Bogga Hore</a>
+        <div class="adsense-placeholder">[ AdSense Top Ad ]</div>
+        <article>
+            <h2>${title}</h2>
+            <div class="article-meta">
+                <strong>Qoriga:</strong> ${author}
+            </div>
+            <img src="${imgUrl}" alt="${title}" class="featured-image" loading="lazy">
+${sectionsHTML}
+${takeawaysHTML}
+        </article>
+        <div class="adsense-placeholder">[ AdSense Bottom Ad ]</div>
+    </div>
+    <footer>
+        <p>&copy; 2026 Fadal Store. All rights reserved.</p>
+        <p>
+            <a href="privacy-policy.html">Privacy Policy</a> | 
+            <a href="terms-of-service.html">Terms of Service</a>
+        </p>
+    </footer>
+</body>
+</html>`;
+
+    document.getElementById('output-area').textContent = html;
+    document.getElementById('output-area').style.display = 'block';
+    document.getElementById('copy-btn').style.display = 'inline-block';
+    document.getElementById('gen-success').style.display = 'block';
+    window.generatedHTML = html;
+    window.generatedFilename = filename;
+}
+
+function copyHTML() {
+    navigator.clipboard.writeText(window.generatedHTML || '').then(() => {
+        alert('✅ HTML waa la nuqulliyay! Ku kaydi file-ka cusub: ' + (window.generatedFilename || 'article.html'));
+    });
+}
+
+function buildArticleList() {
+    const list = document.getElementById('article-list');
+    const slist = document.getElementById('sitemap-list');
+    list.innerHTML = '';
+    slist.innerHTML = '';
+    for (let i = 1; i <= 30; i++) {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="article${i}.html" target="_blank">📄 Side Hustle & Money Making Guide - Qaybta ${i}</a> <span class="badge">article${i}.html</span>`;
+        list.appendChild(li);
+
+        const sli = document.createElement('li');
+        sli.innerHTML = `<a href="https://fadalstore.github.io/Online-Money/article${i}.html" target="_blank">🔗 article${i}.html</a> <span class="badge">✅ Sitemap</span>`;
+        slist.appendChild(sli);
+    }
+}
+</script>
+</body>
+</html>
