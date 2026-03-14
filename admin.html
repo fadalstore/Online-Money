@@ -247,9 +247,31 @@
         <div class="panel active" id="new-post">
             <div class="card">
                 <h2>✏️ Samee Post/Article Cusub</h2>
-                <div class="info-box">
-                    💡 <strong>Sida loo isticmaalo:</strong> Buuxi foomka hoose, ka dibna dhagsii "Samee HTML". Koodhka la sameeyay ka nuqul oo ku kaydi file cusub sida <code>article31.html</code>.
+
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px;">
+                    <div style="background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:18px;border-radius:10px;text-align:center;">
+                        <div style="font-size:1.8rem;font-weight:800;">30</div>
+                        <div style="font-size:0.8rem;opacity:0.9;">Articles Jira</div>
+                    </div>
+                    <div style="background:linear-gradient(135deg,#27ae60,#1e8449);color:#fff;padding:18px;border-radius:10px;text-align:center;">
+                        <div style="font-size:1.8rem;font-weight:800;">31</div>
+                        <div style="font-size:0.8rem;opacity:0.9;">Article Xiga</div>
+                    </div>
+                    <div style="background:linear-gradient(135deg,#f39c12,#d68910);color:#fff;padding:18px;border-radius:10px;text-align:center;">
+                        <div style="font-size:1.8rem;font-weight:800;">2</div>
+                        <div style="font-size:0.8rem;opacity:0.9;">Luuqadood</div>
+                    </div>
                 </div>
+
+                <div class="info-box">
+                    💡 <strong>Sida loo isticmaalo:</strong> Buuxi foomka hoose, ka dibna dhagsii "Samee HTML". Koodhka la sameeyay ka nuqul oo ku kaydi file cusub sida <code>article31.html</code>. Dooro luuqadda article-ka (Somali ama English) ka dibna cusboonaysiinta sitemap-ka waa lagaama boodaa.
+                </div>
+
+                <label>Luuqadda Article-ka (Language) *</label>
+                <select id="post-lang" onchange="updateLangDefaults()">
+                    <option value="so">🇸🇴 Somali (af Soomaali)</option>
+                    <option value="en">🇬🇧 English</option>
+                </select>
 
                 <label>Cinwaan (Title) *</label>
                 <input type="text" id="post-title" placeholder="Tusaale: Side Hustle Guide - Qaybta 31">
@@ -274,6 +296,11 @@
                 <label>Takliifaha Muhiimsan (Key Takeaways) - hal kasta sadar gaar ah</label>
                 <textarea id="post-takeaways" placeholder="Start small and build consistency&#10;Focus on quality&#10;Learn continuously"></textarea>
 
+                <div style="background:#f8f9ff;border:2px solid #e8ecff;border-radius:8px;padding:16px;margin-bottom:18px;">
+                    <strong style="color:#667eea;">📋 Sitemap Xasuusnow:</strong> Marka aad article cusub samayso, ku dar URL-kiisa sitemap.xml buugga sida:<br>
+                    <code style="font-size:0.82rem;background:#fff;padding:4px 8px;border-radius:4px;display:inline-block;margin-top:8px;">https://fadalstore.github.io/article31.html</code>
+                </div>
+
                 <button class="btn" onclick="generateHTML()">🔨 Samee HTML</button>
                 <div class="success-msg" id="gen-success">✅ HTML waa la sameeyay! Nuqul ka qaado.</div>
                 <button class="copy-btn" id="copy-btn" onclick="copyHTML()">📋 Nuqul HTML</button>
@@ -284,6 +311,11 @@
         <div class="panel" id="all-posts">
             <div class="card">
                 <h2>📋 Articles-ka Jira (30 Article)</h2>
+                <div style="display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap;">
+                    <span style="background:#667eea;color:#fff;padding:6px 14px;border-radius:20px;font-size:0.85rem;font-weight:600;">🇸🇴 Somali: 29 Articles</span>
+                    <span style="background:#27ae60;color:#fff;padding:6px 14px;border-radius:20px;font-size:0.85rem;font-weight:600;">🇬🇧 English: 1 Article</span>
+                    <span style="background:#f39c12;color:#fff;padding:6px 14px;border-radius:20px;font-size:0.85rem;font-weight:600;">📦 Wadarta: 30 Article</span>
+                </div>
                 <ul class="article-list" id="article-list"></ul>
             </div>
         </div>
@@ -547,18 +579,43 @@ function copyHTML() {
     });
 }
 
+function updateLangDefaults() {
+    const lang = document.getElementById('post-lang').value;
+    const titleEl = document.getElementById('post-title');
+    const authorEl = document.getElementById('post-author');
+    if (lang === 'en') {
+        titleEl.placeholder = 'Example: How to Make Money Online - Part 31';
+        authorEl.placeholder = 'Example: Fadal Store Team | 10-15 min read';
+    } else {
+        titleEl.placeholder = 'Tusaale: Side Hustle Guide - Qaybta 31';
+        authorEl.placeholder = 'Tusaale: Ganacsiga Online-ka | 8-10 min';
+    }
+}
+
 function buildArticleList() {
+    const ARTICLES = {};
+    for (let i = 1; i <= 29; i++) {
+        ARTICLES[i] = { title: `Side Hustle & Money Making Guide - Qaybta ${i}`, lang: 'so', flag: '🇸🇴' };
+    }
+    ARTICLES[30] = { title: 'How to Make Money Online in 2026: The Ultimate Side Hustle Guide (50+ Methods)', lang: 'en', flag: '🇬🇧' };
+
     const list = document.getElementById('article-list');
     const slist = document.getElementById('sitemap-list');
     list.innerHTML = '';
     slist.innerHTML = '';
-    for (let i = 1; i <= 30; i++) {
+
+    for (let i = 30; i >= 1; i--) {
+        const a = ARTICLES[i];
+        const langBadge = a.lang === 'en'
+            ? `<span style="background:#27ae60;color:#fff;padding:3px 8px;border-radius:12px;font-size:0.75rem;font-weight:600;margin-left:6px;">EN</span>`
+            : `<span style="background:#667eea;color:#fff;padding:3px 8px;border-radius:12px;font-size:0.75rem;font-weight:600;margin-left:6px;">SO</span>`;
+
         const li = document.createElement('li');
-        li.innerHTML = `<a href="article${i}.html" target="_blank">📄 Side Hustle & Money Making Guide - Qaybta ${i}</a> <span class="badge">article${i}.html</span>`;
+        li.innerHTML = `<a href="article${i}.html" target="_blank">${a.flag} ${a.title}</a>${langBadge} <span class="badge">article${i}.html</span>`;
         list.appendChild(li);
 
         const sli = document.createElement('li');
-        sli.innerHTML = `<a href="https://fadalstore.github.io/article${i}.html" target="_blank">🔗 article${i}.html</a> <span class="badge">✅ Sitemap</span>`;
+        sli.innerHTML = `<a href="https://fadalstore.github.io/article${i}.html" target="_blank">🔗 article${i}.html</a>${langBadge} <span class="badge">✅ Sitemap</span>`;
         slist.appendChild(sli);
     }
 }
