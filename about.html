@@ -1,56 +1,191 @@
 <!DOCTYPE html>
-<html lang="so">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nagu Saabsan | Fadal Store</title>
-    <meta name="description" content="Halkan ka baro macluumaad ku saabsan Fadal Store.">
-    <link rel="canonical" href="https://fadalstore.github.io/about.html">
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f4f4f4; color: #333; }
-        header { background: #2c3e50; color: #fff; padding: 1.5rem 0; text-align: center; }
-        header h1 { margin: 0; font-size: 2rem; }
-        nav { background: #34495e; padding: 10px 0; text-align: center; }
-        nav a { color: #fff; text-decoration: none; margin: 0 15px; font-weight: 500; }
-        nav a:hover { text-decoration: underline; }
-        .container { max-width: 800px; margin: auto; overflow: hidden; padding: 20px; background: #fff; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .adsense-placeholder { background: #e9ecef; border: 2px dashed #adb5bd; text-align: center; padding: 30px; margin: 25px 0; color: #6c757d; font-weight: bold; border-radius: 4px; }
-        footer { background: #2c3e50; color: #fff; text-align: center; padding: 15px 0; margin-top: 40px; }
-        footer a { color: #fff; text-decoration: underline; margin: 0 10px; }
-        a { color: #007bff; text-decoration: none; font-weight: 500; }
-        a:hover { text-decoration: underline; color: #0056b3; }
-        .back-link { display: inline-block; margin-bottom: 20px; padding: 8px 15px; background: #f8f9fa; border-radius: 4px; border: 1px solid #dee2e6; }
-        .back-link:hover { background: #e2e6ea; text-decoration: none; }
-        h2, h3 { color: #2c3e50; }
-        article h2 { border-bottom: 2px solid #f4f4f4; padding-bottom: 10px; }
-    </style>
-    <!-- Geli koodhkaaga AdSense Head halkan -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Fadal Store – Financial Freedom & Online Business</title>
+  <meta name="description" content="Learn about Fadal Store — your trusted resource for financial freedom, making money online, and building a sustainable online business in 2026.">
+  <link rel="canonical" href="https://fadalstore.github.io/about.html">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="About Us | Fadal Store">
+  <meta property="og:description" content="Your trusted resource for financial freedom and making money online in 2026.">
+  <meta name="monetag" content="860a37a794837b4efac8301af8d3f599">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9732596199385216" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--primary:#5b21b6;--primary2:#7c3aed;--accent:#a855f7;--green:#84cc16;--dark:#0f0528;--text:#1e1b4b;--muted:#6b7280;--border:#e5e7eb;--bg:#f9fafb;--white:#fff;--radius:12px;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Inter','Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:16px;}
+    .topbar{background:var(--primary);color:#fff;text-align:center;padding:8px 20px;font-size:.82rem;font-weight:500;}
+    .topbar a{color:var(--green);text-decoration:none;font-weight:700;}
+    header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(91,33,182,.08);}
+    .header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:66px;}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+    .logo-icon{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:1.1rem;}
+    .logo-text{font-weight:800;font-size:1.2rem;color:var(--primary);}
+    .logo-text span{color:var(--accent);}
+    .desktop-nav{display:flex;align-items:center;gap:6px;}
+    .desktop-nav a{padding:8px 14px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.92rem;color:var(--text);transition:background .2s,color .2s;}
+    .desktop-nav a:hover,.desktop-nav a.active{background:#f3f0ff;color:var(--primary);}
+    .header-cta{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;padding:9px 20px;border-radius:25px;font-weight:700;font-size:.88rem;text-decoration:none;margin-left:8px;}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;border:none;background:none;}
+    .hamburger span{display:block;width:24px;height:2.5px;background:var(--primary);border-radius:2px;transition:all .3s;}
+    .hamburger.open span:nth-child(1){transform:translateY(7.5px) rotate(45deg);}
+    .hamburger.open span:nth-child(2){opacity:0;}
+    .hamburger.open span:nth-child(3){transform:translateY(-7.5px) rotate(-45deg);}
+    .mobile-nav{display:none;position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100vh;background:#fff;z-index:2000;box-shadow:-4px 0 30px rgba(0,0,0,.15);padding:24px;transition:right .35s cubic-bezier(.4,0,.2,1);overflow-y:auto;}
+    .mobile-nav.open{right:0;}
+    .mobile-nav-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;}
+    .mobile-nav-close{font-size:1.6rem;cursor:pointer;color:var(--muted);background:none;border:none;}
+    .mobile-nav a{display:block;padding:13px 16px;border-radius:10px;text-decoration:none;font-weight:600;color:var(--text);font-size:1rem;margin-bottom:4px;}
+    .mobile-nav a:hover{background:#f3f0ff;color:var(--primary);}
+    .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:1500;}
+    .overlay.open{display:block;}
+    .page-hero{background:linear-gradient(135deg,#3b0764 0%,#5b21b6 50%,#7c3aed 100%);color:#fff;padding:70px 24px;text-align:center;}
+    .page-hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:14px;}
+    .page-hero p{font-size:1.05rem;opacity:.88;max-width:560px;margin:0 auto;}
+    .breadcrumb{background:#fff;border-bottom:1px solid var(--border);padding:12px 24px;}
+    .breadcrumb-inner{max-width:1200px;margin:0 auto;font-size:.82rem;color:var(--muted);}
+    .breadcrumb a{color:var(--primary);text-decoration:none;font-weight:600;}
+    .main-content{max-width:860px;margin:0 auto;padding:50px 24px 70px;}
+    .content-card{background:var(--white);border-radius:var(--radius);padding:40px;box-shadow:0 4px 24px rgba(91,33,182,.08);margin-bottom:28px;}
+    h2{font-size:1.45rem;font-weight:800;color:var(--primary);margin:34px 0 14px;padding-left:14px;border-left:4px solid var(--accent);}
+    h2:first-child{margin-top:0;}
+    h3{font-size:1.1rem;font-weight:700;color:var(--text);margin:22px 0 10px;}
+    p{margin:12px 0;color:#374151;}
+    ul,ol{margin:12px 0 12px 24px;}
+    li{margin:9px 0;color:#374151;}
+    .mission-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin:24px 0;}
+    .mission-card{background:var(--bg);border:2px solid var(--border);border-radius:10px;padding:22px;text-align:center;border-top:4px solid var(--primary);}
+    .mission-card .icon{font-size:2rem;margin-bottom:10px;}
+    .mission-card h4{font-weight:800;color:var(--primary);margin-bottom:8px;font-size:.96rem;}
+    .mission-card p{font-size:.85rem;color:var(--muted);margin:0;}
+    .highlight-box{background:linear-gradient(135deg,#f3f0ff,#faf5ff);border-left:5px solid var(--primary);padding:20px 24px;border-radius:8px;margin:20px 0;}
+    .highlight-box strong{color:var(--primary);}
+    .cta-section{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;padding:40px;border-radius:var(--radius);text-align:center;margin-top:32px;}
+    .cta-section h3{font-size:1.5rem;font-weight:900;margin-bottom:12px;color:#fff;}
+    .cta-section p{opacity:.9;margin-bottom:20px;}
+    .cta-section a{background:var(--green);color:#1a2e05;padding:12px 28px;border-radius:25px;font-weight:800;text-decoration:none;display:inline-block;}
+    footer{background:#0f0528;color:rgba(255,255,255,.75);}
+    .footer-bottom{border-top:1px solid rgba(255,255,255,.08);}
+    .footer-bottom-inner{max-width:1200px;margin:0 auto;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+    .footer-bottom-inner p{font-size:.83rem;}
+    .footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+    .footer-links a{font-size:.83rem;color:rgba(255,255,255,.55);text-decoration:none;}
+    .footer-links a:hover{color:var(--green);}
+    @media(max-width:768px){.desktop-nav,.header-cta{display:none;}.hamburger{display:flex;}.mobile-nav{display:block;}.content-card{padding:24px;}}
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Fadal Store</h1>
-        <p style="margin:5px 0 0 0; opacity: 0.9;">Xaruntaada Xorriyadda Maaliyadeed iyo Ganacsiga Online-ka</p>
-    </header>
-    <nav>
-        <a href="index.html">Bogga Hore</a>
-        <a href="about.html">Nagu Saabsan</a>
-        <a href="contact.html">Nala Soo Xiriir</a>
+<div class="topbar">🔥 <a href="article25.html">New: Making Money with AI Tools in 2026 – 20 Proven Strategies →</a></div>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo"><div class="logo-icon">FS</div><span class="logo-text">Fadal <span>Store</span></span></a>
+    <nav class="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="contact.html">Contact</a>
     </nav>
-    <div class="container">
-        
-    <h2>Nagu Saabsan (About Us)</h2>
-    <p>Ku soo dhawaaw <strong>Fadal Store</strong>.</p>
-    <p>Ujeedadayadu waa inaan dadka ku dhiirigelino, soona bandhigno macluumaad qiimo leh oo la xiriira sidii lacag looga samayn lahaa internet-ka, maamulka maaliyadda, iyo abuurista ganacsi online ah.</p>
-    <p>Waxaan rumaysannahay in qof kastaa awood u leeyahay inuu gaadho xorriyad maaliyadeed isagoo baranaya xirfado cusub oo casri ah oo ku saabsan dunida teknoolojiyada.</p>
-    <p>Boggan wuxuu qayb ka yahay dadaalada aan ku doonayno inaan aqoonta ku wadaagno.</p>
+    <a href="index.html#newsletter" class="header-cta">Subscribe Free →</a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<div class="overlay" id="overlay"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-header">
+    <a href="index.html" class="logo"><div class="logo-icon">FS</div><span class="logo-text">Fadal <span>Store</span></span></a>
+    <button class="mobile-nav-close" id="navClose">✕</button>
+  </div>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="privacy-policy.html">Privacy Policy</a>
+  <a href="terms-of-service.html">Terms of Service</a>
+</nav>
 
+<div class="page-hero">
+  <h1>About Fadal Store</h1>
+  <p>Your trusted guide for financial freedom, online business, and making money in the digital economy.</p>
+</div>
+<div class="breadcrumb"><div class="breadcrumb-inner"><a href="index.html">Home</a> › About Us</div></div>
+
+<div class="main-content">
+  <div class="content-card">
+    <h2>Our Mission</h2>
+    <p>At Fadal Store, our mission is simple: to provide clear, actionable, and honest guidance to anyone who wants to build financial freedom through the internet. We believe that with the right knowledge and consistent effort, anyone — regardless of background, location, or starting budget — can build a meaningful online income.</p>
+    <p>We publish in-depth, research-backed guides covering every major method for making money online in 2026: freelancing, blogging, affiliate marketing, e-commerce, social media, AI tools, investing, and much more. Every guide is written with depth, accuracy, and practical applicability at its core.</p>
+
+    <div class="mission-grid">
+      <div class="mission-card"><div class="icon">🎯</div><h4>Accuracy First</h4><p>Every guide reflects real 2026 market conditions and verified data.</p></div>
+      <div class="mission-card"><div class="icon">📚</div><h4>True Depth</h4><p>5,000+ word comprehensive guides that leave nothing out.</p></div>
+      <div class="mission-card"><div class="icon">🆓</div><h4>Always Free</h4><p>All content is free to read. No paywalls, no upsells, ever.</p></div>
+      <div class="mission-card"><div class="icon">🌍</div><h4>Global Relevance</h4><p>Guides relevant for readers and entrepreneurs worldwide.</p></div>
     </div>
-    <footer>
-        <p>&copy; 2024 Fadal Store. All rights reserved.</p>
-        <p>
-            <a href="privacy-policy.html">Privacy Policy</a> | 
-            <a href="terms-of-service.html">Terms of Service</a>
-        </p>
-    </footer>
+
+    <h2>What We Cover</h2>
+    <p>Fadal Store currently publishes over 30 comprehensive guides covering the full spectrum of online income strategies:</p>
+    <ul>
+      <li><strong>Freelancing:</strong> Fiverr, Upwork, direct client acquisition, niche specialization, and scaling to $10,000+/month</li>
+      <li><strong>Content businesses:</strong> Blogging, YouTube, podcasting, and newsletter monetization</li>
+      <li><strong>E-commerce:</strong> Dropshipping, Amazon FBA, print on demand, and Shopify stores</li>
+      <li><strong>Digital income:</strong> Affiliate marketing, digital products, email marketing, and online courses</li>
+      <li><strong>Emerging opportunities:</strong> AI tools, social media monetization, and creator economy strategies</li>
+      <li><strong>Financial education:</strong> Investing, financial freedom planning, passive income, and wealth building</li>
+    </ul>
+
+    <h2>Why Trust Fadal Store?</h2>
+    <div class="highlight-box"><strong>Our commitment:</strong> We only publish information we have researched carefully, verified against current market data, and written with the goal of being genuinely useful. We do not make unrealistic income promises and we are transparent about the time and effort required to build real online income.</div>
+    <p>Every article on Fadal Store includes:</p>
+    <ul>
+      <li>5,000+ words of in-depth, actionable content</li>
+      <li>Current 2026 data, statistics, and platform information</li>
+      <li>Step-by-step guidance appropriate for complete beginners</li>
+      <li>Advanced strategies for those ready to scale</li>
+      <li>FAQ sections addressing the most common reader questions</li>
+    </ul>
+
+    <h2>Our Core Values</h2>
+    <h3>Honesty over hype</h3>
+    <p>We do not promote get-rich-quick schemes. Building a real online income takes time, consistent effort, and intelligent strategy. We tell you the truth about timelines, effort required, and realistic income expectations.</p>
+    <h3>Quality over quantity</h3>
+    <p>We would rather publish one exceptional 5,000-word guide than ten mediocre 500-word posts. Every piece of content we publish is the result of careful research, thoughtful writing, and thorough editing.</p>
+    <h3>Reader-first approach</h3>
+    <p>Every guide we write starts with one question: "What does our reader genuinely need to know to succeed with this topic?" We write for humans first and search engines second.</p>
+
+    <h2>Contact Us</h2>
+    <p>We would love to hear from you. Whether you have a question about a guide, want to suggest a topic, or simply want to say hello, reach out through any of these channels:</p>
+    <ul>
+      <li>🟢 <strong>WhatsApp:</strong> <a href="https://wa.me/252634844506" target="_blank" rel="noopener">+252 634 844 506</a></li>
+      <li>📧 <strong>Email:</strong> <a href="mailto:fadalstore7@gmail.com">fadalstore7@gmail.com</a></li>
+    </ul>
+
+    <div class="cta-section">
+      <h3>Start Your Journey Today</h3>
+      <p>Browse our complete library of free guides and find the strategy that fits your skills, goals, and situation.</p>
+      <a href="index.html">Browse All Guides →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <div class="footer-bottom-inner">
+      <p>Copyright &copy; 2026 <strong style="color:#fff">Fadal Store</strong> | Powered by Fadal Store</p>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-service.html">Terms</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+  const h=document.getElementById('hamburger'),m=document.getElementById('mobileNav'),o=document.getElementById('overlay'),c=document.getElementById('navClose');
+  function on(){m.classList.add('open');o.classList.add('open');h.classList.add('open');document.body.style.overflow='hidden';}
+  function off(){m.classList.remove('open');o.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';}
+  h.addEventListener('click',()=>m.classList.contains('open')?off():on());
+  c.addEventListener('click',off);o.addEventListener('click',off);
+</script>
 </body>
 </html>
