@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fadalstore.github.io/Online-Money/sitemap.xml
+Sitemap: https://fadalstore.github.io/sitemap.xml
