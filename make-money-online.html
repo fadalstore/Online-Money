@@ -11,6 +11,28 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9732596199385216" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
+    /* ===== BLOGGER THEME HEADER (global) ===== */
+    .bl-topbar{background:#1a1a2e;color:#fff;text-align:center;padding:7px 20px;font-size:.8rem;font-weight:500;}
+    .bl-topbar a{color:#ffd700;text-decoration:none;font-weight:700;}
+    .bl-topbar a:hover{color:#fff;}
+    .bl-site-header{background:linear-gradient(135deg,#c0392b 0%,#e74c3c 50%,#ff6b35 100%);padding:18px 0 14px;text-align:center;}
+    .bl-site-title{font-family:'Georgia','Playfair Display',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#fff;text-decoration:none!important;display:block;letter-spacing:-.5px;}
+    .bl-site-title span{color:#ffd700;}
+    .bl-site-desc{color:rgba(255,255,255,.85);font-size:.82rem;margin-top:4px;}
+    .bl-navbar{background:#222;border-bottom:3px solid #ff6b35;position:sticky;top:0;z-index:1000;}
+    .bl-navbar-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 20px;}
+    .bl-navbar-links{display:flex;gap:0;}
+    .bl-navbar-links a{display:block;color:#ddd;font-size:.84rem;font-weight:500;padding:12px 14px;transition:background .2s,color .2s;text-decoration:none!important;border-right:1px solid #333;}
+    .bl-navbar-links a:first-child{border-left:1px solid #333;}
+    .bl-navbar-links a:hover,.bl-navbar-links a.bl-active{background:#ff6b35;color:#fff!important;}
+    .bl-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px 0;}
+    .bl-hamburger span{display:block;width:22px;height:2px;background:#ddd;border-radius:2px;}
+    @media(max-width:768px){
+      .bl-navbar-links{display:none;position:absolute;top:100%;left:0;right:0;background:#222;z-index:999;flex-direction:column;}
+      .bl-navbar-links.bl-open{display:flex;}
+      .bl-navbar-links a{border-right:none;border-left:none;border-bottom:1px solid #333;padding:13px 20px;}
+      .bl-hamburger{display:flex;}
+    }
     :root{--primary:#5b21b6;--primary2:#7c3aed;--accent:#a855f7;--green:#84cc16;--dark:#0f0528;--text:#1e1b4b;--muted:#6b7280;--border:#e5e7eb;--bg:#f9fafb;--white:#fff;--radius:12px;}
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
     body{font-family:'Inter','Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:16px;}
@@ -82,32 +104,38 @@
 </script>
 </head>
 <body>
-<div class="topbar">🔥 <a href="article25.html">New: Making Money with AI Tools in 2026 – 20 Proven Strategies →</a></div>
-<header>
-  <div class="header-inner">
-    <a href="index.html" class="logo"><div class="logo-icon">FS</div><span class="logo-text">Fadal <span>Store</span></span></a>
-    <nav class="desktop-nav">
-      <a href="index.html">Home</a>
+
+
+
+<!-- BL TOPBAR -->
+<div class="bl-topbar">
+  🔥 NEW: <a href="article40.html">17 Ways to Make Money with AI in 2026 – Up to $15K/Month →</a>
+</div>
+
+<!-- BL SITE HEADER -->
+<header class="bl-site-header">
+  <a href="index.html" class="bl-site-title">Fadal <span>Store</span></a>
+  <div class="bl-site-desc">Financial Freedom · Online Business · Make Money Online · AI Tools</div>
+</header>
+
+<!-- BL NAVBAR -->
+<nav class="bl-navbar">
+  <div class="bl-navbar-inner">
+    <div class="bl-navbar-links" id="blNavLinks">
+      <a href="index.html">🏠 Home</a>
+      <a href="make-money-online.html" class="bl-active">Make Money</a>
+      <a href="freelancing.html">Freelancing</a>
+      <a href="ai-tools.html">AI Tools</a>
+      <a href="apps.html">Best Apps</a>
+      <a href="partnerstack.html">Affiliate</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
-    </nav>
-    <a href="index.html#newsletter" class="header-cta">Subscribe Free →</a>
-    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <button class="bl-hamburger" id="blHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</header>
-<div class="overlay" id="overlay"></div>
-<nav class="mobile-nav" id="mobileNav">
-  <div class="mobile-nav-header">
-    <a href="index.html" class="logo"><div class="logo-icon">FS</div><span class="logo-text">Fadal <span>Store</span></span></a>
-    <button class="mobile-nav-close" id="navClose">✕</button>
-  </div>
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="contact.html">Contact</a>
-  <a href="privacy-policy.html">Privacy Policy</a>
-  <a href="terms-of-service.html">Terms of Service</a>
 </nav>
-
 <div class="page-hero">
   <h1>How to Make Money Online in 2026</h1>
   <p>15 proven methods — from complete beginner to expert level — to build real online income this year.</p>
@@ -173,6 +201,14 @@
   function off(){m.classList.remove('open');o.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';}
   h.addEventListener('click',()=>m.classList.contains('open')?off():on());
   c.addEventListener('click',off);o.addEventListener('click',off);
+</script>
+
+<script>
+  (function(){
+    var h = document.getElementById('blHamburger');
+    var n = document.getElementById('blNavLinks');
+    if(h && n) h.addEventListener('click', function(){ n.classList.toggle('bl-open'); });
+  })();
 </script>
 </body>
 </html>
