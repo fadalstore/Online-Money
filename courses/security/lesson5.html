@@ -32,6 +32,25 @@
     .lesson-nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px;padding-top:24px;border-top:2px solid var(--border);gap:12px;flex-wrap:wrap;}.nav-btn{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:7px;font-weight:700;font-size:.88rem;transition:all .2s;}.nav-btn-prev{background:#f5f5f5;color:var(--muted);border:1px solid var(--border);}.nav-btn-prev:hover{background:#e5e5e5;color:var(--text);}.nav-btn-next{background:var(--sec);color:#fff;border:1px solid var(--sec);}.nav-btn-next:hover{background:var(--sec-dark);color:#fff;}
     .lesson-sidebar{display:flex;flex-direction:column;gap:16px;}.sidebar-box{background:var(--white);border-radius:10px;border:1px solid var(--border);overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.05);}.sidebar-box-head{background:var(--sec);color:#fff;padding:11px 16px;font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;}.sidebar-box-body{padding:12px 14px;}.sidebar-lesson-link{display:flex;align-items:center;gap:8px;padding:7px 4px;font-size:.81rem;color:var(--text);border-bottom:1px solid #f5f5f5;text-decoration:none;border-radius:4px;}.sidebar-lesson-link:last-child{border-bottom:none;}.sidebar-lesson-link:hover{color:var(--sec);background:var(--sec-light);}.sidebar-lesson-link.current{background:var(--sec-light);color:var(--sec);font-weight:700;}.sidebar-num{width:20px;height:20px;border-radius:50%;background:#dcfce7;color:var(--sec);font-size:.66rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}.sidebar-num.active{background:var(--sec);color:#fff;}
     .site-footer{background:var(--dark);color:rgba(255,255,255,.75);padding:32px 0 0;}.footer-inner{max-width:1100px;margin:0 auto;padding:0 20px 24px;}.footer-logo{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;font-weight:800;color:#fff;}.footer-logo span{color:#ffd700;}.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding:14px 20px;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:.78rem;}.footer-bottom a{color:rgba(255,255,255,.6);}.footer-bottom a:hover{color:#ffd700;}
+
+    /* === COURSE STEPPER === */
+    .course-stepper{background:#fff;border-bottom:2px solid var(--border);padding:14px 0;}
+    .stepper-inner{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;align-items:flex-start;justify-content:center;}
+    .stepper-step{display:flex;flex-direction:column;align-items:center;gap:5px;text-decoration:none;flex:1;position:relative;max-width:110px;}
+    .stepper-dot{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.78rem;border:2px solid #e2e8f0;background:#f8fafc;color:#94a3b8;transition:all .2s;position:relative;z-index:1;}
+    .stepper-label{font-size:.6rem;color:#94a3b8;text-align:center;font-weight:700;text-transform:uppercase;letter-spacing:.04em;line-height:1.3;max-width:60px;}
+    .stepper-connector{flex:1;height:2px;background:#e2e8f0;margin-top:16px;transition:background .3s;}
+    .stepper-step.done .stepper-dot{background:#dbeafe;border-color:var(--prog);color:var(--prog);}
+    .stepper-step.done .stepper-label{color:var(--prog);}
+    .stepper-step.active .stepper-dot{background:var(--prog);border-color:var(--prog);color:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.2);}
+    .stepper-step.active .stepper-label{color:var(--prog);font-weight:800;}
+    .stepper-connector.done{background:var(--prog);}
+    @media(max-width:480px){.stepper-label{display:none;}.stepper-dot{width:28px;height:28px;font-size:.72rem;}.stepper-connector{margin-top:13px;}}
+    .course-stepper.sec-stepper .stepper-step.done .stepper-dot{background:#d1fae5;border-color:var(--sec);color:var(--sec);}
+    .course-stepper.sec-stepper .stepper-step.done .stepper-label{color:var(--sec);}
+    .course-stepper.sec-stepper .stepper-step.active .stepper-dot{background:var(--sec);border-color:var(--sec);color:#fff;box-shadow:0 0 0 4px rgba(5,150,105,.2);}
+    .course-stepper.sec-stepper .stepper-step.active .stepper-label{color:var(--sec);}
+    .course-stepper.sec-stepper .stepper-connector.done{background:var(--sec);}
   </style>
 </head>
 <body>
@@ -53,6 +72,40 @@
     <div class="lesson-badge">🔐 Casharka 5aad – Heerka 2aad</div>
     <h1>Scanning & Enumeration<br>Isticmaalka Nmap si Xirfad leh</h1>
     <div class="lesson-hero-meta"><span>⏱ ~65 Daqiiqo</span><span>📖 Heer: Dhexe</span><span>🌍 Af-Soomaali</span></div>
+  </div>
+</div>
+
+<div class="course-stepper sec-stepper">
+  <div class="stepper-inner">
+    <a href="lesson1.html" class="stepper-step done" title="Hordhac">
+      <div class="stepper-dot">1</div>
+      <div class="stepper-label">Hordhac</div>
+    </a>
+    <div class="stepper-connector done"></div>
+    <a href="lesson2.html" class="stepper-step done" title="Network">
+      <div class="stepper-dot">2</div>
+      <div class="stepper-label">Network</div>
+    </a>
+    <div class="stepper-connector done"></div>
+    <a href="lesson3.html" class="stepper-step done" title="Linux">
+      <div class="stepper-dot">3</div>
+      <div class="stepper-label">Linux</div>
+    </a>
+    <div class="stepper-connector done"></div>
+    <a href="lesson4.html" class="stepper-step done" title="OSINT">
+      <div class="stepper-dot">4</div>
+      <div class="stepper-label">OSINT</div>
+    </a>
+    <div class="stepper-connector done"></div>
+    <a href="lesson5.html" class="stepper-step active" title="Nmap">
+      <div class="stepper-dot">5</div>
+      <div class="stepper-label">Nmap</div>
+    </a>
+    <div class="stepper-connector "></div>
+    <a href="lesson6.html" class="stepper-step upcoming" title="Web Sec">
+      <div class="stepper-dot">6</div>
+      <div class="stepper-label">Web Sec</div>
+    </a>
   </div>
 </div>
 
