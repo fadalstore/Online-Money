@@ -3,7 +3,7 @@ from datetime import datetime
 
 def generate_sitemap():
     base_url = "https://fadalstore.github.io/"
-    root_dir = "/home/ubuntu/fadalstore.github.io"
+    root_dir = "/home/ubuntu/fadalstore_site"
     
     # Files to exclude from sitemap
     exclude_files = [
