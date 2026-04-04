@@ -1,35 +1,17 @@
 ---
 layout: page
-title: Mediumish Template for Jekyll
-permalink: /about
-comments: true
+title: Ku saabsan Fadal Store
+permalink: /about/
 ---
 
-<div class="row justify-content-between">
-<div class="col-md-8 pr-5">
+Fadal Store waa mareeg loogu talagalay in lagu caawiyo dhalinyarada Soomaaliyeed si ay u helaan xirfado casri ah oo ay lacag uga samayn karaan online-ka. Waxaan bixinaa maqaallo, casharo, iyo hagis dhamaystiran oo ku saabsan:
 
-<p>This website is built with Jekyll and Mediumish template for Jekyll. It's for demonstration purposes, no real content can be found. Mediumish template for Jekyll is compatible with Github pages, in fact even this demo is created with Github Pages and hosted with Github.</p>
+*   **Programming:** Barashada luuqadaha Python, JavaScript, iyo horumarinta website-yada.
+*   **Remote Work:** Sida loo helo shaqooyin caalami ah adiga oo gurigaaga jooga.
+*   **Make Money Online:** Hababka ugu wanaagsan ee lacag looga sameeyo internet-ka sanadka 2026.
+*   **Cybersecurity:** Ilaalinta xogta iyo barashada amniga internet-ka.
 
-<p class="mb-5"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/mediumish-jekyll-template.png" alt="jekyll template mediumish" /></p>
-<h4>Documentation</h4>
+Hadafkayagu waa inaan dhisno bulsho Soomaaliyeed oo aqoon u leh tignoolajiyada casriga ah, isla markaana ka faa'iidaysata fursadaha aan xadka lahayn ee internet-ka.
 
-<p>Please, read the docs <a href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/">here</a>.</p>
-
-<h4>Questions or bug reports?</h4>
-
-<p>Head over to our <a href="https://github.com/wowthemesnet/mediumish-theme-jekyll">Github repository</a>!</p>
-
-</div>
-
-<div class="col-md-4">
-
-<div class="sticky-top sticky-top-80">
-<h5>Buy me a coffee</h5>
-
-<p>Thank you for your support! Your donation helps me to maintain and improve <a target="_blank" href="https://github.com/wowthemesnet/mediumish-theme-jekyll">Mediumish <i class="fab fa-github"></i></a>.</p>
-
-<a target="_blank" href="https://www.wowthemes.net/donate/" class="btn btn-danger">Buy me a coffee</a> <a target="_blank" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/" class="btn btn-warning">Documentation</a>
-
-</div>
-</div>
-</div>
+Haddii aad qabto wax su'aalo ah ama aad u baahan tahay caawimaad, fadlan nagala soo xidhiidh:
+**Email:** contact@fadalstore.com

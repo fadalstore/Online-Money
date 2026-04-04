@@ -8,7 +8,7 @@ baseurl: ""
 google_analytics: ''
 disqus: ''
 mailchimp-list: ''
-include: ["_pages", "maqaallo"]
+include: ["_pages"]
 permalink: /:title/
 
 # Authors

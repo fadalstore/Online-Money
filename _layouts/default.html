@@ -15,6 +15,50 @@
 <link href="{{ site.baseurl }}/assets/css/screen.css" rel="stylesheet">
 
 <link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet">
+<style>
+/* Course & Article Custom Styles */
+.highlight-box { background: #f0f9ff; border-left: 5px solid #0ea5e9; padding: 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+.stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 25px 0; }
+.stat-card { background: #fff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.stat-card .number { font-size: 1.5rem; font-weight: 800; color: #0ea5e9; display: block; }
+.stat-card .label { font-size: 0.8rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+.info-box { background: #f1f5f9; border-radius: 8px; padding: 15px; margin: 20px 0; font-size: 0.95rem; }
+.tip-box { background: #fffbeb; border-left: 5px solid #f59e0b; padding: 15px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+.code-box, pre { background: #1e293b; color: #f8fafc; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; margin: 20px 0; }
+.course-btn { display: inline-block; padding: 10px 20px; border-radius: 5px; color: #fff !important; font-weight: 700; text-decoration: none !important; margin-top: 10px; }
+.course-btn.prog { background: #2563eb; }
+.course-btn.sec { background: #059669; }
+.lesson-list { list-style: none; padding: 0; margin: 20px 0; }
+.lesson-list li { padding: 8px 0; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; }
+.lesson-num { width: 24px; height: 24px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; margin-right: 10px; flex-shrink: 0; }
+.lesson-num.prog { background: #2563eb; }
+.lesson-num.sec { background: #059669; }
+.courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 30px; }
+.course-card { border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s; }
+.course-card:hover { transform: translateY(-5px); }
+.course-card-header { padding: 20px; color: #fff; text-align: center; }
+.course-card-header.prog { background: linear-gradient(135deg, #1d4ed8, #2563eb); }
+.course-card-header.sec { background: linear-gradient(135deg, #065f46, #059669); }
+.course-card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+.course-icon { font-size: 2rem; margin-bottom: 10px; }
+.course-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 5px; }
+.course-meta { display: flex; gap: 10px; font-size: 0.8rem; color: #64748b; margin-bottom: 15px; }
+/* Sidebar Styles */
+.lesson-wrap { display: flex; flex-wrap: wrap; gap: 30px; }
+.lesson-wrap main { flex: 1; min-width: 300px; }
+.lesson-sidebar { width: 300px; }
+.sidebar-box { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 20px; overflow: hidden; }
+.sidebar-box-head { background: #f8fafc; padding: 10px 15px; font-weight: 700; border-bottom: 1px solid #e2e8f0; }
+.sidebar-box-body { padding: 15px; }
+.sidebar-lesson-link { display: flex; align-items: center; padding: 8px 0; color: #475569; text-decoration: none !important; font-size: 0.9rem; border-bottom: 1px solid #f1f5f9; }
+.sidebar-lesson-link:last-child { border-bottom: none; }
+.sidebar-lesson-link.current { color: #2563eb; font-weight: 700; }
+.sidebar-num { width: 20px; height: 20px; border-radius: 50%; background: #e2e8f0; color: #64748b; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; margin-right: 10px; flex-shrink: 0; }
+.sidebar-num.active { background: #2563eb; color: #fff; }
+@media (max-width: 768px) {
+  .lesson-sidebar { width: 100%; }
+}
+</style>
 
 <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
 
@@ -72,19 +116,19 @@ ga('send', 'pageview');
                 </li>
 
                 <li class="nav-item">
-                <a class="nav-link" href="{{ site.baseurl }}/maqaallo/about.html">Ku saabsan</a>
+                <a class="nav-link" href="{{ site.baseurl }}/about/">Ku saabsan</a>
                 </li>
 
                 <li class="nav-item">
-                <a class="nav-link" href="{{ site.baseurl }}/maqaallo/remote-work.html">Remote Work</a>
+                <a class="nav-link" href="{{ site.baseurl }}/category/remote-work/">Remote Work</a>
                 </li>
 
                 <li class="nav-item">
-                <a class="nav-link" href="{{ site.baseurl }}/maqaallo/make-money-online.html">Make Money Online</a>
+                <a class="nav-link" href="{{ site.baseurl }}/category/make-money-online/">Make Money Online</a>
                 </li>
 
                 <li class="nav-item">
-                <a class="nav-link" href="{{ site.baseurl }}/maqaallo/programming.html">Programming</a>
+                <a class="nav-link" href="{{ site.baseurl }}/category/programming/">Programming</a>
                 </li>
 
                 <li class="nav-item">
@@ -175,7 +219,7 @@ ga('send', 'pageview');
                 Copyright © {{ site.time | date: "%Y" }} {{ site.name }} 
             </div>
             <div class="col-md-6 col-sm-6 text-center text-lg-right">    
-                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net
+                Master Fadal
             </div>
         </div>
     </div>
