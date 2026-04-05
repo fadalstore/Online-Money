@@ -50,8 +50,8 @@ kramdown:
 
 # Adsense
 adsense: "enabled"
-adsense-data-ad-client: "ca-pub-9732596199385216"
-adsense-data-ad-slot: "auto"
+adsense_data_ad_client: "ca-pub-9732596199385216"
+adsense_data_ad_slot: "auto"
 
 # Lazy Images
 lazyimages: "enabled"
