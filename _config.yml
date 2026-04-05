@@ -17,10 +17,14 @@ authors:
   fadal:
     name: Fadal
     display_name: Fadal
-    avatar: 'assets/images/avatar.png'
+    avatar: 'assets/images/avatar.jpg'
     email: contact@fadalstore.com
     web: https://fadalstore.github.io
-    twitter: https://twitter.com/fadalstore
+    twitter: https://x.com/fadalsheekh?s=21
+    telegram: https://t.me/fadalsheekh
+    facebook: https://www.facebook.com/share/1Cd2CGo1W1/?mibextid=wwXIfr
+    whatsapp: https://wa.me/message/B4E27ZTETP3CG1
+    youtube: https://youtube.com/@hiig-c4c?si=ijjeBnnEA9HhV_N3
     description: "Fadal waa khabiir ku takhasusay ganacsiga online-ka iyo horumarinta website-yada."
 
 # Plugins

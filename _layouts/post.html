@@ -32,8 +32,16 @@ post_class: post-template
                         {% endif %}
                     </div>
                     <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
-                        <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a target="_blank" href="{{ author.twitter }}" class="btn follow">Follow</a>
+                        <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a>
+                        {% if author.telegram %}<a target="_blank" href="{{ author.telegram }}" class="btn follow">Follow</a>{% endif %}
                         <span class="author-description">{{ author.description }}</span>
+                        <div class="mt-2">
+                            {% if author.telegram %}<a href="{{ author.telegram }}" target="_blank" rel="noopener" class="mr-2" style="color:#0088cc;font-size:1.2rem;" title="Telegram"><i class="fab fa-telegram-plane"></i></a>{% endif %}
+                            {% if author.facebook %}<a href="{{ author.facebook }}" target="_blank" rel="noopener" class="mr-2" style="color:#1877f2;font-size:1.2rem;" title="Facebook"><i class="fab fa-facebook-f"></i></a>{% endif %}
+                            {% if author.twitter %}<a href="{{ author.twitter }}" target="_blank" rel="noopener" class="mr-2" style="color:#1da1f2;font-size:1.2rem;" title="X / Twitter"><i class="fab fa-twitter"></i></a>{% endif %}
+                            {% if author.whatsapp %}<a href="{{ author.whatsapp }}" target="_blank" rel="noopener" class="mr-2" style="color:#25d366;font-size:1.2rem;" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>{% endif %}
+                            {% if author.youtube %}<a href="{{ author.youtube }}" target="_blank" rel="noopener" class="mr-2" style="color:#ff0000;font-size:1.2rem;" title="YouTube"><i class="fab fa-youtube"></i></a>{% endif %}
+                        </div>
                     </div>
                 </div>
                 {% endif %}
