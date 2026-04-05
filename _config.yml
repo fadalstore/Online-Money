@@ -61,4 +61,4 @@ adsense-data-ad-slot: "auto"
 # Lazy Images
 lazyimages: "enabled"
 
-exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock, backup_fadal, attached_assets, check_links.py, check_orphans.py, fix_and_generate.js, generate_articles.js, generate_english.js, generate_programming.js, generate_sitemap.py, package-lock.json, package.json, serve.json]
+exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock, backup_fadal, attached_assets, check_links.py, check_orphans.py, fix_and_generate.js, generate_articles.js, generate_english.js, generate_programming.js, generate_sitemap.py, package-lock.json, package.json, serve.json, .local, .replit, replit.nix]
