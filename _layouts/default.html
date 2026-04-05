@@ -78,11 +78,11 @@ ga('send', 'pageview');
 
 {% capture layout %}{% if page.layout %}layout-{{ page.layout }}{% endif %}{% endcapture %}
 <body class="{{layout}}">
-	<!-- defer loading of font and font awesome -->
-	<noscript id="deferred-styles">
-		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-	</noscript>
+        <!-- defer loading of font and font awesome -->
+        <noscript id="deferred-styles">
+                <link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+        </noscript>
 
 
 <!-- Begin Menu Navigation
@@ -132,7 +132,11 @@ ga('send', 'pageview');
                 </li>
 
                 <li class="nav-item">
-                <a class="nav-link" href="{{ site.baseurl }}/courses/index.html">Courses</a>
+                <a class="nav-link" href="{{ site.baseurl }}/category/cybersecurity/">Cybersecurity</a>
+                </li>
+
+                <li class="nav-item">
+                <a class="nav-link" href="{{ site.baseurl }}/courses/">Courses</a>
                 </li>
 
                 {% include search-lunr.html %}
@@ -161,25 +165,41 @@ ga('send', 'pageview');
     </p>
 </div>
 
+<!-- Adsense if enabled from _config.yml -->
+{% if site.adsense == "enabled" and site.adsense-data-ad-client != "ca-pub-xxxxxxxxxxxxxxxx" %}
+<div class="my-3">
+    {% include adsense-under-header.html %}
+</div>
+{% endif %}
+<!-- End Adsense -->
+
 <!-- Content
 ================================================== -->
 <div class="main-content">
     {{ content }}
 </div>
 
+<!-- Adsense Bottom if enabled -->
+{% if site.adsense == "enabled" and site.adsense-data-ad-client != "ca-pub-xxxxxxxxxxxxxxxx" %}
+<div class="my-4">
+    {% include adsense-under-header.html %}
+</div>
+{% endif %}
+<!-- End Adsense Bottom -->
+
 {% if site.mailchimp-list %}
 <!-- Bottom Alert Bar
 ================================================== -->
 <div class="alertbar">
-	<div class="container text-center">
-		<span><img src="{{ site.baseurl }}/{{ site.logo }}" alt="{{site.title}}"> &nbsp; Never miss a <b>story</b> from us, subscribe to our newsletter</span>
+        <div class="container text-center">
+                <span><img src="{{ site.baseurl }}/{{ site.logo }}" alt="{{site.title}}"> &nbsp; Never miss a <b>story</b> from us, subscribe to our newsletter</span>
         <form action="{{site.mailchimp-list}}" method="post" name="mc-embedded-subscribe-form" class="wj-contact-form validate" target="_blank" novalidate>
             <div class="mc-field-group">
             <input type="email" placeholder="Email" name="EMAIL" class="required email" id="mce-EMAIL" autocomplete="on" required>
             <input type="submit" value="Subscribe" name="subscribe" class="heart">
             </div>
         </form>
-	</div>
+        </div>
 </div>
 {% endif %}
     
@@ -188,13 +208,13 @@ ga('send', 'pageview');
 <!-- Categories Jumbotron
 ================================================== -->
 <div class="jumbotron fortags">
-	<div class="d-md-flex h-100">
-		<div class="col-md-4 transpdark align-self-center text-center h-100">
+        <div class="d-md-flex h-100">
+                <div class="col-md-4 transpdark align-self-center text-center h-100">
             <div class="d-md-flex align-items-center justify-content-center h-100">
                 <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
             </div>
-		</div>
-		<div class="col-md-8 p-5 align-self-center text-center">
+                </div>
+                <div class="col-md-8 p-5 align-self-center text-center">
             {% assign categories_list = site.categories %}
             {% if categories_list.first[0] == null %}
                 {% for category in categories_list %}
@@ -206,20 +226,48 @@ ga('send', 'pageview');
                 {% endfor %}
             {% endif %}
             {% assign categories_list = nil %}
-		</div>
-	</div>
+                </div>
+        </div>
 </div>
 
 <!-- Begin Footer
 ================================================== -->
 <footer class="footer">
     <div class="container">
+        <div class="row mb-4">
+            <div class="col-md-4 col-sm-6 mb-3 mb-md-0">
+                <h6 class="font-weight-bold mb-3">{{ site.name }}</h6>
+                <p class="small text-muted">{{ site.description }}</p>
+                <p class="small text-muted">📧 contact@fadalstore.com</p>
+            </div>
+            <div class="col-md-4 col-sm-6 mb-3 mb-md-0">
+                <h6 class="font-weight-bold mb-3">Maqaallada</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-1"><a href="{{ site.baseurl }}/category/make-money-online/" class="text-muted">💰 Make Money Online</a></li>
+                    <li class="mb-1"><a href="{{ site.baseurl }}/category/remote-work/" class="text-muted">🌍 Remote Work</a></li>
+                    <li class="mb-1"><a href="{{ site.baseurl }}/category/programming/" class="text-muted">💻 Programming</a></li>
+                    <li class="mb-1"><a href="{{ site.baseurl }}/category/cybersecurity/" class="text-muted">🔐 Cybersecurity</a></li>
+                    <li class="mb-1"><a href="{{ site.baseurl }}/courses/" class="text-muted">📚 Courses</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <h6 class="font-weight-bold mb-3">Bogagga</h6>
+                <ul class="list-unstyled small">
+                    <li class="mb-1"><a href="{{ site.baseurl }}/about/" class="text-muted">ℹ️ Ku saabsan</a></li>
+                    <li class="mb-1"><a href="{{ site.baseurl }}/privacy-policy/" class="text-muted">🔒 Privacy Policy</a></li>
+                    <li class="mb-1"><a href="{{ site.baseurl }}/disclaimer/" class="text-muted">⚠️ Disclaimer</a></li>
+                    <li class="mb-1"><a href="{{ site.baseurl }}/terms-of-service/" class="text-muted">📄 Terms of Service</a></li>
+                    <li class="mb-1"><a href="{{ site.baseurl }}/sitemap.xml" class="text-muted">🗺️ Sitemap</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border-color: #e2e8f0;">
         <div class="row">
             <div class="col-md-6 col-sm-6 text-center text-lg-left">
-                Copyright © {{ site.time | date: "%Y" }} {{ site.name }} 
+                <small class="text-muted">Copyright © {{ site.time | date: "%Y" }} {{ site.name }} — Xuquuqda waa Dhawrantahay</small>
             </div>
-            <div class="col-md-6 col-sm-6 text-center text-lg-right">    
-                Master Fadal
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+                <small class="text-muted">Designed by Master Fadal</small>
             </div>
         </div>
     </div>

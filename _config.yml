@@ -5,6 +5,7 @@ description: "Maqaallo, Tababaro iyo Agabka Ganacsiga Online-ka."
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/logo.png'
 baseurl: ""
+url: "https://fadalstore.com"
 google_analytics: ''
 disqus: ''
 mailchimp-list: ''
