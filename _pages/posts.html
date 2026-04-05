@@ -1,0 +1,26 @@
+---
+layout: default
+permalink: /posts/
+title: "Dhammaan Maqaallada – Fadal Store"
+description: "Dhamaan maqaallada Fadal Store – Make Money Online, Remote Work, iyo General."
+---
+
+<div class="section-title">
+  <h2>📰 <span>Dhammaan Maqaallada</span></h2>
+  <p class="text-muted">Dhamaan maqaallada website-ka — Make Money Online, Remote Work, iyo wax badan</p>
+</div>
+
+<div class="row listrecent">
+  {% assign excluded = "Programming,programming,Cybersecurity,cybersecurity" | split: "," %}
+  {% for post in site.posts %}
+    {% assign skip = false %}
+    {% for cat in post.categories %}
+      {% if excluded contains cat %}
+        {% assign skip = true %}
+      {% endif %}
+    {% endfor %}
+    {% unless skip %}
+      {% include postbox.html %}
+    {% endunless %}
+  {% endfor %}
+</div>
