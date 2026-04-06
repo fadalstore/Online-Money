@@ -5,8 +5,8 @@ author: fadal
 date: 2026-04-05
 categories: [reviews]
 tags: [Allen Levi, Theo of Golden, Books, 2026 Trends]
-thumbnail: 'https://m.media-amazon.com/images/I/71XmXn+e-eL.jpg'
-image: 'https://m.media-amazon.com/images/I/71XmXn+e-eL.jpg'
+thumbnail: assets/images/theo-of-golden-cover.jpg
+image: assets/images/theo-of-golden-cover.jpg
 description: "Theo of Golden Review: Discover whether Allen Levi’s new novel is based on a true story, who Willa is, and how the ending explains the heart of the book."
 featured: true
 hidden: false
