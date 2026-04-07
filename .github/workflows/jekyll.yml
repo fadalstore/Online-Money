@@ -1,9 +1,8 @@
-# Workflow-gan wuxuu u qoran yahay inuu u Deploy gareeyo Jekyll bogga GitHub Pages
 name: Deploy Jekyll site to Pages
 
 on:
   push:
-    branches: ["main"] # Hubi in magaca branch-kaagu yahay main
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -13,6 +12,10 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
+
+# Tani waxay xallinaysaa digniinta Node.js 20
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build:
@@ -24,11 +27,11 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3' # Waxaan u dallacsiinnay 3.3 si uu ula shaqeeyo public_suffix
+          ruby-version: '3.3' # Tani waa furaha guusha (Ruby 3.3)
           bundler-cache: true 
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5 # Waxaan u dallacsiinnay v5
 
       - name: Build with Jekyll
         run: bundle exec jekyll build
