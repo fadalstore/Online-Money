@@ -1,5 +1,6 @@
-User-Agent: *
+User-agent: *
 Allow: /
+Allow: /ads.txt
 Allow: /assets/
 Allow: /assets/images/
 Allow: /pagead/
