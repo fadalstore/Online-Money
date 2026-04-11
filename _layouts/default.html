@@ -67,6 +67,18 @@
 @media (max-width: 768px) {
   .lesson-sidebar { width: 100%; }
 }
+/* Breadcrumb Navigation */
+.fadal-breadcrumb { margin: 0 0 18px 0; }
+.breadcrumb-list { display: flex; flex-wrap: wrap; align-items: center; list-style: none; padding: 8px 14px; margin: 0; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0; font-size: 0.82rem; gap: 2px; }
+.breadcrumb-item { white-space: nowrap; }
+.breadcrumb-item a { color: #2563eb; text-decoration: none; font-weight: 500; transition: color 0.2s; }
+.breadcrumb-item a:hover { color: #1d4ed8; text-decoration: underline; }
+.breadcrumb-item.active { color: #64748b; font-weight: 400; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+.breadcrumb-sep { color: #94a3b8; font-size: 1rem; line-height: 1; padding: 0 2px; }
+@media (max-width: 576px) {
+  .breadcrumb-item.active { max-width: 160px; }
+  .breadcrumb-list { font-size: 0.78rem; padding: 6px 10px; }
+}
 </style>
 
 <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
