@@ -21,14 +21,7 @@ beforetoc: "I have used both AdSense and affiliate marketing on the same website
   "image": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&h=630&fit=crop&q=80",
   "author": { "@type": "Person", "name": "Fadal" },
   "publisher": { "@type": "Organization", "name": "Fadal Store" },
-  "datePublished": "2026-04-13",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "bestRating": "5",
-    "worstRating": "1",
-    "ratingCount": "1654"
-  }
+  "datePublished": "2026-04-13"
 }
 </script>
 

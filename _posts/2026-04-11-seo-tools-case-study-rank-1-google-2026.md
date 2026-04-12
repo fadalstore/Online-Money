@@ -21,14 +21,7 @@ beforetoc: "This is not a theoretical guide. These are the real results, real to
   "image": "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop&q=80",
   "author": { "@type": "Person", "name": "Fadal" },
   "publisher": { "@type": "Organization", "name": "Fadal Store" },
-  "datePublished": "2026-04-14",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "bestRating": "5",
-    "worstRating": "1",
-    "ratingCount": "743"
-  }
+  "datePublished": "2026-04-14"
 }
 </script>
 

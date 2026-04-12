@@ -21,14 +21,7 @@ beforetoc: "You don't need to be a designer to have a professional website. Thes
   "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=630&fit=crop&q=80",
   "author": { "@type": "Person", "name": "Fadal" },
   "publisher": { "@type": "Organization", "name": "Fadal Store" },
-  "datePublished": "2026-04-11",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.7",
-    "bestRating": "5",
-    "worstRating": "1",
-    "ratingCount": "892"
-  }
+  "datePublished": "2026-04-11"
 }
 </script>
 

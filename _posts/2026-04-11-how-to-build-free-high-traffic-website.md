@@ -25,13 +25,6 @@ beforetoc: "This is a real case study — not theory. Every step you read here i
     "currency": "USD",
     "value": "0"
   },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.8",
-    "bestRating": "5",
-    "worstRating": "1",
-    "ratingCount": "1247"
-  },
   "step": [
     {
       "@type": "HowToStep",

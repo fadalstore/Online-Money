@@ -21,13 +21,6 @@ beforetoc: "A 1-second delay in page load time causes a 7% drop in conversions a
   "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop&q=80",
   "totalTime": "PT2H",
   "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "bestRating": "5",
-    "worstRating": "1",
-    "ratingCount": "2103"
-  },
   "step": [
     { "@type": "HowToStep", "name": "Measure Your Current Speed", "text": "Use Google PageSpeed Insights and GTmetrix to get your baseline score and identify the biggest issues." },
     { "@type": "HowToStep", "name": "Optimize and Compress Images", "text": "Convert images to WebP format and compress them using free tools like Squoosh or TinyPNG." },
