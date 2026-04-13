@@ -22,14 +22,20 @@ The Replit workflow runs this command on port 5000.
 
 ## Project Structure
 ```
-_posts/          # 53 blog posts (article1-52 + cybersecurity-guide) as Markdown files
-_pages/          # Static pages (about, categories, tags, disclaimer, privacy-policy, terms-of-service + 12 restored legacy pages)
+_posts/          # 67+ blog posts covering freelancing, affiliate, AI, YouTube, programming, cybersecurity
+_pages/          # Static pages (about, contact, legal, legacy + utility pages below)
 _layouts/        # Jekyll layout templates (default.html, post.html, etc.)
 _includes/       # Reusable HTML components (adsense-under-header.html, etc.)
 _sass/           # SCSS stylesheets
 assets/          # CSS, JS, images
-courses/         # Programming (7 lessons) and Cybersecurity (6 lessons) course pages
+courses/         # 3 full courses: Programming (7L), Cybersecurity (6L), Freelancing (6L)
 ```
+
+## Utility Pages (New)
+- `/tools.html` — Qaladaadka ugu fiican: Fiverr, Upwork, Payoneer, Canva, ChatGPT, affiliate programs
+- `/start-here.html` — Tilmaamaha cusub soo galaya: 4 paths (cusub, freelancing, blog, AI) + FAQ
+- `/free-resources.html` — Agab bilaash: checklists (freelancer, blog, SEO), learning platforms, top articles
+- `/remote-jobs.html` — Shaqooyinka remote: platforms, job boards, pay table, tips
 
 ## Navigation (navbar)
 Blog | Ku saabsan | Remote Work | Make Money Online | Programming | Cybersecurity | Courses
