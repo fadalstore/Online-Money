@@ -123,7 +123,7 @@ post_class: post-template
             <!-- Post Tags -->
             <div class="after-post-tags">
                 <ul class="tags">
-                    {% assign sortedTags = page.tags | sort %}
+                    {% assign sortedTags = page.tags | sort_natural %}
                     {% for tag in sortedTags %}
                     <li>
                         <a class="smoothscroll" href="{{site.baseurl}}/tags#{{ tag | replace: " ","-" }}">#{{ tag }}</a>
