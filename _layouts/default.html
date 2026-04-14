@@ -248,6 +248,85 @@ ga('send', 'pageview');
     
 </div>
 
+<!-- Related Recent Posts Section (shows on content pages only)
+================================================== -->
+{% assign skip_pages = '/,/world-news.html,/posts.html,/categories/,/tags/,/contact.html,/privacy-policy.html,/disclaimer.html,/terms-of-service.html,/about.html,/sitemap.xml,' %}
+{% assign show_recent = true %}
+{% if page.layout == 'post' %}{% assign show_recent = false %}{% endif %}
+{% if page.url == '/' or page.url == '/index.html' %}{% assign show_recent = false %}{% endif %}
+{% if skip_pages contains page.url %}{% assign show_recent = false %}{% endif %}
+{% if page.hide_recent_posts %}{% assign show_recent = false %}{% endif %}
+
+{% if show_recent %}
+  {% comment %}Detect related category based on URL or page front matter{% endcomment %}
+  {% assign recent_cat = nil %}
+  {% if page.related_category %}
+    {% assign recent_cat = page.related_category %}
+  {% elsif page.url contains 'remote' or page.url contains 'job' or page.url contains 'productivity' or page.url contains 'mental' %}
+    {% assign recent_cat = "Remote Work" %}
+  {% elsif page.url contains 'affiliate' or page.url contains 'amazon' or page.url contains 'fiverr' or page.url contains 'partner' or page.url contains 'money' or page.url contains 'brand' or page.url contains 'cash' or page.url contains 'start-here' or page.url contains 'earn' or page.url contains 'income' or page.url contains 'giraffe' %}
+    {% assign recent_cat = "Make Money Online" %}
+  {% elsif page.url contains 'seo' or page.url contains 'tools' or page.url contains 'keyword' %}
+    {% assign recent_cat = "SEO Tips" %}
+  {% elsif page.url contains 'wararka' or page.url contains 'news' or page.url contains 'tech-news' %}
+    {% assign recent_cat = "Wararka Caalamka" %}
+  {% elsif page.url contains 'programming' or page.url contains 'code' or page.url contains 'python' %}
+    {% assign recent_cat = "Programming" %}
+  {% elsif page.url contains 'security' or page.url contains 'cyber' or page.url contains 'hack' %}
+    {% assign recent_cat = "Cybersecurity" %}
+  {% endif %}
+
+  {% if recent_cat %}
+    {% assign display_posts = site.posts | where_exp: "post", "post.categories contains recent_cat" | limit: 3 %}
+  {% else %}
+    {% assign display_posts = site.posts | limit: 3 %}
+  {% endif %}
+
+  {% if display_posts.size > 0 %}
+  <div style="background:#f8fafc;padding:52px 0 40px;border-top:1px solid #e2e8f0;">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px;">
+        <div>
+          <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:1.55rem;font-weight:800;color:#1a1a2e;margin:0 0 4px;">
+            ✍️ {% if recent_cat %}{{ recent_cat }} — {% endif %}Maqaallada Ugu Cusub
+          </h3>
+          <p style="color:#64748b;font-size:.88rem;margin:0;">Maqaallada kugula haboon ee ugu dambeeyay</p>
+        </div>
+        <a href="/" style="background:#1a2a4a;color:#fff;padding:8px 20px;border-radius:8px;font-size:.82rem;font-weight:700;text-decoration:none;white-space:nowrap;">Dhammaan Eeg →</a>
+      </div>
+      <div class="row">
+        {% for post in display_posts %}
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100 border-0" style="border-radius:14px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.07);transition:transform .2s,box-shadow .2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 10px 28px rgba(0,0,0,.13)'" onmouseout="this.style.transform='';this.style.boxShadow='0 2px 12px rgba(0,0,0,.07)'">
+            {% if post.image %}
+            <a href="{{ post.url }}"><img src="{{ post.image }}" alt="{{ post.title }}" style="width:100%;height:175px;object-fit:cover;" loading="lazy"></a>
+            {% else %}
+            <a href="{{ post.url }}" style="display:block;width:100%;height:175px;background:linear-gradient(135deg,#1a2a4a,#0f172a);display:flex;align-items:center;justify-content:center;font-size:2.5rem;text-decoration:none;">📰</a>
+            {% endif %}
+            <div class="card-body" style="padding:18px 18px 14px;">
+              {% if post.categories.first %}
+              <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#ef4444;display:block;margin-bottom:7px;">{{ post.categories.first }}</span>
+              {% endif %}
+              <h5 style="font-family:'Playfair Display',Georgia,serif;font-size:.98rem;font-weight:800;color:#1a1a2e;line-height:1.4;margin-bottom:10px;">
+                <a href="{{ post.url }}" style="color:inherit;text-decoration:none;">{{ post.title | truncate: 72 }}</a>
+              </h5>
+              {% if post.description %}
+              <p style="font-size:.8rem;color:#64748b;line-height:1.55;margin-bottom:12px;">{{ post.description | truncate: 90 }}</p>
+              {% endif %}
+              <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid #f1f5f9;padding-top:10px;margin-top:auto;">
+                <small style="color:#94a3b8;font-size:.75rem;">📅 {{ post.date | date: "%b %-d, %Y" }}</small>
+                <a href="{{ post.url }}" style="background:#1a2a4a;color:#fff;padding:4px 13px;border-radius:6px;font-size:.73rem;font-weight:700;text-decoration:none;">Akhri →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+{% endif %}
+
 <!-- Categories Jumbotron
 ================================================== -->
 <div class="jumbotron fortags">
