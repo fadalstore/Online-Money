@@ -99,6 +99,9 @@ ga('send', 'pageview');
 
 {% capture layout %}{% if page.layout %}layout-{{ page.layout }}{% endif %}{% endcapture %}
 <body class="{{layout}}">
+<!-- AADS Ad -->
+{% include aads-ad.html %}
+<!-- End AADS Ad -->
         <!-- defer loading of font and font awesome -->
         <noscript id="deferred-styles">
                 <link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
@@ -219,12 +222,6 @@ ga('send', 'pageview');
 <div class="main-content">
     {{ content }}
 </div>
-
-<!-- AADS Ad -->
-<div class="my-4">
-    {% include aads-ad.html %}
-</div>
-<!-- End AADS Ad -->
 
 <!-- Adsense Bottom if enabled -->
 {% if jekyll.environment == 'production' and site.adsense == "enabled" and site.adsense_data_ad_client != "ca-pub-xxxxxxxxxxxxxxxx" %}
