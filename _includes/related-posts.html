@@ -1,69 +1,95 @@
+{% comment %} Score each post: +3 per shared category, +2 per shared tag {% endcomment %}
 {% assign maxRelated = 3 %}
-{% assign relatedPosts = "" | split: "" %}
+{% assign scoredList = "" | split: "" %}
 
 {% for post in site.posts %}
   {% unless post.url == page.url %}
-    {% assign commonScore = 0 %}
+    {% assign s = 0 %}
     {% for tag in post.tags %}
-      {% if page.tags contains tag %}
-        {% assign commonScore = commonScore | plus: 2 %}
-      {% endif %}
+      {% if page.tags contains tag %}{% assign s = s | plus: 2 %}{% endif %}
     {% endfor %}
     {% for cat in post.categories %}
-      {% if page.categories contains cat %}
-        {% assign commonScore = commonScore | plus: 3 %}
-      {% endif %}
+      {% if page.categories contains cat %}{% assign s = s | plus: 3 %}{% endif %}
     {% endfor %}
-    {% if commonScore >= 1 %}
-      {% assign relatedPosts = relatedPosts | push: post %}
+    {% if s > 0 %}
+      {% capture entry %}{{ s | prepend: "0000" | slice: -4, 4 }}|{{ post.url }}{% endcapture %}
+      {% assign scoredList = scoredList | push: entry %}
     {% endif %}
   {% endunless %}
 {% endfor %}
 
-{% if relatedPosts.size == 0 %}
-  {% for post in site.posts limit:4 %}
+{% assign sortedScored = scoredList | sort | reverse %}
+{% assign relatedUrls = "" | split: "" %}
+{% for entry in sortedScored limit: 3 %}
+  {% assign parts = entry | split: "|" %}
+  {% assign relatedUrls = relatedUrls | push: parts[1] %}
+{% endfor %}
+
+{% comment %} Fallback: most-recent posts if no overlap {% endcomment %}
+{% if relatedUrls.size == 0 %}
+  {% for post in site.posts limit: 4 %}
     {% unless post.url == page.url %}
-      {% if relatedPosts.size < 3 %}
-        {% assign relatedPosts = relatedPosts | push: post %}
+      {% if relatedUrls.size < 3 %}
+        {% assign relatedUrls = relatedUrls | push: post.url %}
       {% endif %}
     {% endunless %}
   {% endfor %}
 {% endif %}
 
-{% if relatedPosts.size > 0 %}
-<div class="related-posts-section mt-5 mb-4">
-  <h4 class="font-weight-bold mb-4" style="border-bottom: 2px solid #007bff; padding-bottom: 10px;">
-    <i class="fa fa-bookmark mr-2" style="color:#007bff;"></i> Related Articles
-  </h4>
-  <div class="row">
-    {% assign count = 0 %}
-    {% for post in relatedPosts %}
-      {% if count < maxRelated %}
-        <div class="col-md-4 mb-4">
-          <div class="card h-100 shadow-sm" style="border-radius:10px; overflow:hidden; border:none;">
-            {% if post.image %}
-            <a href="{{ site.baseurl }}{{ post.url }}">
-              {% if post.image contains "://" %}
-              <img src="{{ post.image }}" alt="{{ post.title }}" class="card-img-top" style="height:160px;object-fit:cover;" loading="lazy">
-              {% else %}
-              <img src="{{ site.baseurl }}/{{ post.image }}" alt="{{ post.title }}" class="card-img-top" style="height:160px;object-fit:cover;" loading="lazy">
-              {% endif %}
-            </a>
-            {% endif %}
-            <div class="card-body d-flex flex-column">
-              <h6 class="card-title font-weight-bold" style="font-size:0.95rem; line-height:1.4;">
-                <a href="{{ site.baseurl }}{{ post.url }}" style="color:#333; text-decoration:none;">{{ post.title | truncate: 70 }}</a>
-              </h6>
-              {% if post.description %}
-              <p class="card-text text-muted" style="font-size:0.82rem;">{{ post.description | truncate: 100 }}</p>
-              {% endif %}
-              <a href="{{ site.baseurl }}{{ post.url }}" class="btn btn-outline-primary btn-sm mt-auto" style="border-radius:20px;">Read More →</a>
-            </div>
-          </div>
+{% if relatedUrls.size > 0 %}
+<section class="fs-related" aria-labelledby="fs-related-title">
+  <div class="fs-related-head">
+    <h3 id="fs-related-title">📚 Maqaallo La Mid ah</h3>
+    <p>Akhri sii badan oo ku saabsan mawduuca aad aragtay</p>
+  </div>
+  <div class="fs-related-grid">
+    {% for url in relatedUrls %}
+      {% assign post = site.posts | where: "url", url | first %}
+      {% if post %}
+      <a class="fs-related-card" href="{{ site.baseurl }}{{ post.url }}">
+        {% if post.image %}
+          {% if post.image contains "://" %}
+          <img src="{{ post.image }}" alt="{{ post.title | escape }}" loading="lazy" width="320" height="180">
+          {% else %}
+          <img src="{{ site.baseurl }}/{{ post.image }}" alt="{{ post.title | escape }}" loading="lazy" width="320" height="180">
+          {% endif %}
+        {% else %}
+          <div class="fs-related-noimg">📄</div>
+        {% endif %}
+        <div class="fs-related-body">
+          {% if post.categories.first %}
+          <div class="fs-related-cat">{{ post.categories.first }}</div>
+          {% endif %}
+          <h4>{{ post.title | truncate: 75 }}</h4>
+          {% if post.description %}
+          <p>{{ post.description | truncate: 90 }}</p>
+          {% elsif post.excerpt %}
+          <p>{{ post.excerpt | strip_html | truncate: 90 }}</p>
+          {% endif %}
+          <span class="fs-related-link">Akhri →</span>
         </div>
-        {% assign count = count | plus: 1 %}
+      </a>
       {% endif %}
     {% endfor %}
   </div>
-</div>
+</section>
+
+<style>
+.fs-related{margin:40px 0 20px;padding:30px 0;border-top:1px solid #e2e8f0;}
+.fs-related-head{text-align:center;margin-bottom:24px;}
+.fs-related-head h3{font-family:'Playfair Display',Georgia,serif;font-size:1.55rem;font-weight:900;color:#1a1a2e;margin:0 0 4px;}
+.fs-related-head p{color:#64748b;font-size:.9rem;margin:0;}
+.fs-related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.fs-related-card{display:flex;flex-direction:column;background:#fff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;transition:all .2s;}
+.fs-related-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.1);border-color:#cbd5e1;text-decoration:none;color:inherit;}
+.fs-related-card img{width:100%;height:160px;object-fit:cover;display:block;}
+.fs-related-noimg{width:100%;height:160px;background:linear-gradient(135deg,#f1f5f9,#e2e8f0);display:flex;align-items:center;justify-content:center;font-size:2.5rem;color:#94a3b8;}
+.fs-related-body{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1;}
+.fs-related-cat{font-size:.7rem;font-weight:700;text-transform:uppercase;color:#7c3aed;letter-spacing:.7px;margin-bottom:6px;}
+.fs-related-card h4{font-size:1rem;font-weight:800;line-height:1.35;margin:0 0 8px;color:#1a1a2e;}
+.fs-related-card p{font-size:.83rem;color:#64748b;line-height:1.55;margin:0 0 12px;flex:1;}
+.fs-related-link{font-size:.82rem;font-weight:700;color:#2563eb;}
+.fs-related-card:hover .fs-related-link{color:#1d4ed8;}
+</style>
+</section>
 {% endif %}
