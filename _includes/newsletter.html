@@ -1,0 +1,91 @@
+{% if site.mailchimp-list %}
+<section class="fs-newsletter" aria-labelledby="fs-newsletter-title">
+  <div class="fs-news-inner">
+    <div class="fs-news-icon">📬</div>
+    <div class="fs-news-text">
+      <h3 id="fs-newsletter-title">Ku biir Newsletter-ka Fadal Store</h3>
+      <p>Hel maqaallada ugu cusub, tababarrada bilaashka ah, iyo fursadaha ganacsiga online-ka — toos email-kaaga.</p>
+    </div>
+    <form class="fs-news-form" data-action="{{ site.mailchimp-list }}" novalidate>
+      <label for="fs-news-email" class="sr-only">Email address</label>
+      <input type="email" id="fs-news-email" name="email" required placeholder="aragta@email.com" autocomplete="email">
+      <button type="submit">Diiwaan-geli →</button>
+      <p class="fs-news-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<style>
+.fs-newsletter{margin:36px 0;}
+.fs-news-inner{display:flex;align-items:center;gap:22px;background:linear-gradient(135deg,#1a2a4a,#2563eb);color:#fff;padding:28px 32px;border-radius:16px;box-shadow:0 8px 28px rgba(37,99,235,.18);position:relative;overflow:hidden;flex-wrap:wrap;}
+.fs-news-inner::before{content:"";position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:rgba(255,255,255,.08);border-radius:50%;}
+.fs-news-icon{font-size:2.6rem;line-height:1;flex-shrink:0;position:relative;z-index:1;}
+.fs-news-text{flex:1;min-width:220px;position:relative;z-index:1;}
+.fs-news-text h3{font-family:'Playfair Display',Georgia,serif;font-size:1.25rem;font-weight:800;margin:0 0 4px;color:#fff;}
+.fs-news-text p{margin:0;font-size:.88rem;color:rgba(255,255,255,.85);line-height:1.5;}
+.fs-news-form{display:flex;gap:8px;flex-wrap:wrap;width:100%;max-width:430px;position:relative;z-index:1;margin-top:6px;}
+.fs-news-form input[type=email]{flex:1;min-width:180px;padding:11px 14px;border:0;border-radius:8px;font-size:.92rem;outline:none;color:#1a1a2e;}
+.fs-news-form input[type=email]:focus{box-shadow:0 0 0 3px rgba(255,255,255,.35);}
+.fs-news-form button{padding:11px 20px;background:#fbbf24;color:#1a1a2e;border:0;border-radius:8px;font-weight:700;font-size:.9rem;cursor:pointer;transition:background .15s;white-space:nowrap;}
+.fs-news-form button:hover{background:#f59e0b;}
+.fs-news-form button:disabled{opacity:.6;cursor:not-allowed;}
+.fs-news-msg{width:100%;margin:6px 0 0;font-size:.82rem;min-height:1em;}
+.fs-news-msg.success{color:#bbf7d0;}
+.fs-news-msg.error{color:#fecaca;}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+@media(max-width:640px){
+  .fs-news-inner{padding:22px;text-align:center;}
+  .fs-news-text{min-width:0;}
+  .fs-news-form{margin:0 auto;}
+}
+</style>
+
+<script>
+(function(){
+  var form = document.currentScript.previousElementSibling;
+  while (form && form.tagName !== 'STYLE') form = form.previousElementSibling;
+  // Find the form (last newsletter on page)
+  var forms = document.querySelectorAll('.fs-news-form:not([data-bound])');
+  forms.forEach(function(f){
+    f.setAttribute('data-bound', '1');
+    var msg = f.querySelector('.fs-news-msg');
+    var btn = f.querySelector('button');
+    var input = f.querySelector('input[type=email]');
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      msg.className = 'fs-news-msg';
+      msg.textContent = '';
+      var email = input.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+        msg.className = 'fs-news-msg error';
+        msg.textContent = 'Fadlan geli email sax ah.';
+        return;
+      }
+      btn.disabled = true;
+      var orig = btn.textContent;
+      btn.textContent = 'La diraya...';
+      fetch(f.dataset.action, {
+        method: 'POST',
+        headers: {'Accept':'application/json'},
+        body: new FormData(f)
+      }).then(function(r){
+        if (r.ok){
+          msg.className = 'fs-news-msg success';
+          msg.textContent = '✓ Mahadsanid! Si guul leh ayaad u diiwaan-gashay.';
+          input.value = '';
+        } else {
+          throw new Error('Submit failed');
+        }
+      }).catch(function(){
+        msg.className = 'fs-news-msg error';
+        msg.textContent = 'Khalad ayaa dhacay. Fadlan mar kale isku day.';
+      }).finally(function(){
+        btn.disabled = false;
+        btn.textContent = orig;
+      });
+    });
+  });
+})();
+</script>
+</section>
+{% endif %}
