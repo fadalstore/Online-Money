@@ -1,0 +1,173 @@
+---
+layout: default
+title: "Akhriska Maalinta — Daily Reading List"
+permalink: /daily/
+description: "5 maqaal oo cusub oo si toos ah loo doortay maalin walba — bilow akhrintaada maanta!"
+---
+
+<style>
+.daily-hero{background:linear-gradient(135deg,#7c3aed,#2563eb);color:#fff;padding:42px 24px;border-radius:14px;margin-bottom:28px;text-align:center;position:relative;overflow:hidden;}
+.daily-hero::before{content:"";position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:rgba(255,255,255,.07);border-radius:50%;}
+.daily-hero::after{content:"";position:absolute;bottom:-60px;left:-60px;width:200px;height:200px;background:rgba(255,255,255,.05);border-radius:50%;}
+.daily-hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.6rem,4vw,2.3rem);font-weight:900;margin-bottom:8px;position:relative;z-index:1;}
+.daily-hero .date-badge{display:inline-block;background:rgba(255,255,255,.18);padding:6px 16px;border-radius:20px;font-size:.82rem;font-weight:600;margin-bottom:10px;backdrop-filter:blur(4px);position:relative;z-index:1;}
+.daily-hero p{color:rgba(255,255,255,.88);font-size:.95rem;max-width:540px;margin:0 auto;position:relative;z-index:1;}
+.daily-progress{display:flex;justify-content:center;gap:6px;margin-top:18px;position:relative;z-index:1;}
+.daily-progress span{width:30px;height:4px;background:rgba(255,255,255,.25);border-radius:2px;}
+.daily-progress span.done{background:#fff;}
+.daily-card{display:flex;gap:18px;padding:18px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;margin-bottom:16px;transition:all .2s;position:relative;}
+.daily-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.09);transform:translateY(-2px);border-color:#cbd5e1;}
+.daily-card.read{opacity:.6;}
+.daily-card.read .number{background:#10b981;}
+.daily-card .number{position:absolute;top:-10px;left:-10px;width:32px;height:32px;background:#7c3aed;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;box-shadow:0 2px 6px rgba(0,0,0,.15);}
+.daily-card img{width:140px;height:100px;object-fit:cover;border-radius:10px;flex-shrink:0;}
+.daily-card .body{flex:1;min-width:0;}
+.daily-card .cat{font-size:.7rem;font-weight:700;text-transform:uppercase;color:#7c3aed;letter-spacing:.7px;margin-bottom:4px;}
+.daily-card h3{font-size:1.05rem;font-weight:800;line-height:1.35;margin:0 0 6px;}
+.daily-card h3 a{color:#1a1a2e;text-decoration:none;}
+.daily-card h3 a:hover{color:#7c3aed;}
+.daily-card .excerpt{font-size:.85rem;color:#64748b;line-height:1.55;margin-bottom:8px;}
+.daily-card .meta{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:#94a3b8;flex-wrap:wrap;gap:8px;}
+.daily-card .read-time{display:inline-flex;align-items:center;gap:4px;}
+.mark-btn{background:#f1f5f9;color:#475569;padding:5px 12px;border:0;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .15s;}
+.mark-btn:hover{background:#e2e8f0;}
+.mark-btn.done{background:#10b981;color:#fff;}
+.daily-footer{margin-top:30px;padding:24px;background:#f8fafc;border-radius:12px;text-align:center;border:1px dashed #cbd5e1;}
+.daily-footer p{margin:0 0 12px;color:#64748b;font-size:.9rem;}
+.daily-footer a{display:inline-block;background:#1a2a4a;color:#fff;padding:9px 22px;border-radius:8px;font-size:.85rem;font-weight:600;text-decoration:none;margin:4px;}
+.daily-footer a:hover{background:#0f172a;color:#fff;}
+.daily-footer a.outline{background:transparent;color:#1a2a4a;border:2px solid #1a2a4a;padding:7px 20px;}
+.daily-footer a.outline:hover{background:#1a2a4a;color:#fff;}
+@media(max-width:576px){
+  .daily-card{flex-direction:column;}
+  .daily-card img{width:100%;height:170px;}
+}
+</style>
+
+<div class="daily-hero">
+  <div class="date-badge" id="todayBadge">📅 Maanta</div>
+  <h1>📚 Akhriska Maalinta</h1>
+  <p>5 maqaal oo si toos ah loo doortay maanta. Soo noqo subax kasta — liiska wuu beddelmi doonaa!</p>
+  <div class="daily-progress" id="progress">
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
+</div>
+
+<div id="dailyList"></div>
+
+<div class="daily-footer">
+  <p>🎉 Hadii aad dhamaystirtay liiska maanta — soo noqo berri ama ka raadi maqaallo kale!</p>
+  <a href="/search/">🔍 Raadi Maqaal Kale</a>
+  <a href="/" class="outline">🏠 Bogga Hore</a>
+</div>
+
+<script id="postsData" type="application/json">
+[
+{% for post in site.posts %}
+  {
+    "title": {{ post.title | jsonify }},
+    "url": {{ post.url | jsonify }},
+    "image": {% if post.image %}{{ post.image | jsonify }}{% else %}""{% endif %},
+    "excerpt": {{ post.excerpt | strip_html | truncatewords: 28 | jsonify }},
+    "category": {% if post.categories.first %}{{ post.categories.first | jsonify }}{% else %}""{% endif %},
+    "words": {{ post.content | strip_html | number_of_words }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]
+</script>
+
+<script>
+(function(){
+  var posts = JSON.parse(document.getElementById('postsData').textContent);
+  if (posts.length === 0){
+    document.getElementById('dailyList').innerHTML = '<p style="text-align:center;color:#64748b;padding:40px;">Weli ma jiraan maqaallo. Soo noqo dhowaan!</p>';
+    return;
+  }
+
+  // Date label
+  var today = new Date();
+  var months = ['Jan','Feb','Mar','Abr','May','Jun','Jul','Ago','Seb','Okt','Nof','Dis'];
+  document.getElementById('todayBadge').textContent = '📅 ' + today.getDate() + ' ' + months[today.getMonth()] + ' ' + today.getFullYear();
+
+  // Seeded shuffle by day-of-year + year, so all visitors see same 5 today
+  var start = new Date(today.getFullYear(), 0, 0);
+  var diff = today - start;
+  var dayOfYear = Math.floor(diff / 86400000);
+  var seed = dayOfYear + today.getFullYear() * 1000;
+
+  function rand(){ // mulberry32
+    seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+    var t = seed;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  }
+
+  // Fisher-Yates
+  var pool = posts.slice();
+  for (var i = pool.length - 1; i > 0; i--){
+    var j = Math.floor(rand() * (i + 1));
+    var tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
+  }
+  var picks = pool.slice(0, Math.min(5, pool.length));
+
+  // Render
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  var storeKey = 'fs_daily_read_' + today.toISOString().slice(0,10);
+  var readSet = new Set(JSON.parse(localStorage.getItem(storeKey) || '[]'));
+
+  function readingTime(words){
+    var min = Math.max(1, Math.round(words / 200));
+    return min + ' daq akhrin';
+  }
+
+  function updateProgress(){
+    var dots = document.querySelectorAll('#progress span');
+    picks.forEach(function(p, i){
+      if (readSet.has(p.url)) dots[i].classList.add('done');
+      else dots[i].classList.remove('done');
+    });
+  }
+
+  function render(){
+    var html = picks.map(function(p, idx){
+      var img = p.image ? '<img src="' + escapeHtml(p.image) + '" alt="' + escapeHtml(p.title) + '" loading="lazy" width="140" height="100">' : '';
+      var isRead = readSet.has(p.url);
+      return '<article class="daily-card' + (isRead ? ' read' : '') + '" data-url="' + escapeHtml(p.url) + '">' +
+        '<div class="number">' + (idx + 1) + '</div>' +
+        img +
+        '<div class="body">' +
+          (p.category ? '<div class="cat">' + escapeHtml(p.category) + '</div>' : '') +
+          '<h3><a href="' + escapeHtml(p.url) + '">' + escapeHtml(p.title) + '</a></h3>' +
+          '<p class="excerpt">' + escapeHtml(p.excerpt) + '</p>' +
+          '<div class="meta">' +
+            '<span class="read-time">⏱️ ' + readingTime(p.words) + '</span>' +
+            '<button type="button" class="mark-btn' + (isRead ? ' done' : '') + '">' + (isRead ? '✓ La akhriyay' : 'Calaamadi akhrintaada') + '</button>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+    }).join('');
+    document.getElementById('dailyList').innerHTML = html;
+    updateProgress();
+  }
+
+  document.getElementById('dailyList').addEventListener('click', function(e){
+    var btn = e.target.closest('.mark-btn');
+    if (!btn) return;
+    e.preventDefault();
+    var card = btn.closest('.daily-card');
+    var url = card.dataset.url;
+    if (readSet.has(url)) readSet.delete(url);
+    else readSet.add(url);
+    localStorage.setItem(storeKey, JSON.stringify([...readSet]));
+    render();
+  });
+
+  render();
+})();
+</script>
