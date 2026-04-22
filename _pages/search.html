@@ -1,0 +1,180 @@
+---
+layout: default
+title: "Raadi Maqaal — Search by Tag"
+permalink: /search/
+description: "Raadi maqaallada Fadal Store adigoo isticmaalaya tag-yada ama qoraal."
+---
+
+<style>
+.search-hero{background:linear-gradient(135deg,#0f172a,#1e3a5f);color:#fff;padding:38px 24px;border-radius:14px;margin-bottom:28px;text-align:center;}
+.search-hero h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;margin-bottom:8px;}
+.search-hero p{color:rgba(255,255,255,.8);font-size:.95rem;max-width:520px;margin:0 auto;}
+.search-input-wrap{position:relative;margin-bottom:22px;}
+.search-input-wrap input{width:100%;padding:14px 18px 14px 46px;border:2px solid #e2e8f0;border-radius:10px;font-size:1rem;outline:none;transition:border-color .2s;}
+.search-input-wrap input:focus{border-color:#1a2a4a;}
+.search-input-wrap::before{content:"🔍";position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:1.1rem;}
+.tag-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;padding:18px;background:#f8fafc;border-radius:12px;border:1px solid #e2e8f0;}
+.tag-filters strong{width:100%;font-size:.8rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;}
+.tag-chip{background:#fff;color:#334155;padding:7px 14px;border:1px solid #e2e8f0;border-radius:20px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .15s;user-select:none;}
+.tag-chip:hover{border-color:#1a2a4a;color:#1a2a4a;}
+.tag-chip.active{background:#1a2a4a;color:#fff;border-color:#1a2a4a;}
+.tag-chip .count{opacity:.6;font-weight:400;margin-left:4px;font-size:.75rem;}
+.search-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid #e2e8f0;font-size:.88rem;color:#64748b;flex-wrap:wrap;gap:8px;}
+.search-clear{background:#ef4444;color:#fff;padding:5px 14px;border:0;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer;}
+.search-clear:hover{background:#dc2626;}
+.result-card{display:flex;gap:16px;padding:16px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;margin-bottom:14px;transition:all .2s;}
+.result-card:hover{box-shadow:0 6px 20px rgba(0,0,0,.08);transform:translateY(-2px);}
+.result-card img{width:130px;height:90px;object-fit:cover;border-radius:8px;flex-shrink:0;}
+.result-card .body{flex:1;min-width:0;}
+.result-card .cat{font-size:.7rem;font-weight:700;text-transform:uppercase;color:#ef4444;letter-spacing:.7px;}
+.result-card h3{font-size:1rem;font-weight:800;margin:4px 0 6px;line-height:1.35;}
+.result-card h3 a{color:#1a1a2e;text-decoration:none;}
+.result-card h3 a:hover{color:#1a2a4a;}
+.result-card .excerpt{font-size:.85rem;color:#64748b;line-height:1.5;margin-bottom:6px;}
+.result-card .meta{font-size:.74rem;color:#94a3b8;}
+.result-card .meta .tag{display:inline-block;margin-right:6px;color:#475569;}
+.empty-state{text-align:center;padding:50px 20px;color:#64748b;}
+.empty-state .icon{font-size:3rem;margin-bottom:14px;}
+@media(max-width:576px){
+  .result-card{flex-direction:column;}
+  .result-card img{width:100%;height:160px;}
+}
+</style>
+
+<div class="search-hero">
+  <h1>🔍 Raadi Maqaal</h1>
+  <p>Geli erey ama dooro tag si aad u soo hesho maqaallada kuu haboon.</p>
+</div>
+
+<div class="search-input-wrap">
+  <input type="search" id="searchBox" placeholder="Geli erey... (tusaale: SEO, Python, Fiverr)" aria-label="Raadi maqaal">
+</div>
+
+<div class="tag-filters" id="tagFilters">
+  <strong>🏷️ Tag-yada</strong>
+  {% for tag in site.tags %}
+    <span class="tag-chip" data-tag="{{ tag[0] | downcase }}">{{ tag[0] }}<span class="count">({{ tag[1].size }})</span></span>
+  {% endfor %}
+</div>
+
+<div class="search-meta">
+  <span id="resultCount">Wadarta: <strong>{{ site.posts.size }}</strong> maqaal</span>
+  <button type="button" class="search-clear" id="clearBtn" style="display:none;">✕ Saar Filtarka</button>
+</div>
+
+<div id="results"></div>
+
+<div class="empty-state" id="emptyState" style="display:none;">
+  <div class="icon">📭</div>
+  <p style="font-size:1rem;">Lama helin maqaal kuwa la mid ah filtarkaaga.</p>
+  <p style="font-size:.85rem;">Isku day erey kale ama saar tag-yada qaarkood.</p>
+</div>
+
+<script id="postsData" type="application/json">
+[
+{% for post in site.posts %}
+  {
+    "title": {{ post.title | jsonify }},
+    "url": {{ post.url | jsonify }},
+    "image": {% if post.image %}{{ post.image | jsonify }}{% else %}""{% endif %},
+    "excerpt": {{ post.excerpt | strip_html | truncatewords: 30 | jsonify }},
+    "date": {{ post.date | date: "%b %-d, %Y" | jsonify }},
+    "category": {% if post.categories.first %}{{ post.categories.first | jsonify }}{% else %}""{% endif %},
+    "tags": {{ post.tags | jsonify }},
+    "search": {{ post.title | append: " " | append: post.excerpt | strip_html | downcase | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]
+</script>
+
+<script>
+(function(){
+  var posts = JSON.parse(document.getElementById('postsData').textContent);
+  var searchBox = document.getElementById('searchBox');
+  var tagFilters = document.getElementById('tagFilters');
+  var results = document.getElementById('results');
+  var emptyState = document.getElementById('emptyState');
+  var resultCount = document.getElementById('resultCount');
+  var clearBtn = document.getElementById('clearBtn');
+  var activeTags = new Set();
+  var query = '';
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+
+  function render(){
+    var filtered = posts.filter(function(p){
+      if (query && p.search.indexOf(query) === -1) return false;
+      if (activeTags.size > 0){
+        var lowerTags = (p.tags || []).map(function(t){ return String(t).toLowerCase(); });
+        for (var t of activeTags){ if (lowerTags.indexOf(t) === -1) return false; }
+      }
+      return true;
+    });
+
+    resultCount.innerHTML = 'La helay: <strong>' + filtered.length + '</strong> maqaal';
+    clearBtn.style.display = (query || activeTags.size > 0) ? 'inline-block' : 'none';
+
+    if (filtered.length === 0){
+      results.innerHTML = '';
+      emptyState.style.display = 'block';
+      return;
+    }
+    emptyState.style.display = 'none';
+
+    var html = filtered.slice(0, 50).map(function(p){
+      var img = p.image ? '<img src="' + escapeHtml(p.image) + '" alt="' + escapeHtml(p.title) + '" loading="lazy" width="130" height="90">' : '';
+      var tags = (p.tags || []).slice(0, 4).map(function(t){
+        return '<span class="tag">#' + escapeHtml(t) + '</span>';
+      }).join('');
+      return '<article class="result-card">' + img +
+        '<div class="body">' +
+          (p.category ? '<div class="cat">' + escapeHtml(p.category) + '</div>' : '') +
+          '<h3><a href="' + escapeHtml(p.url) + '">' + escapeHtml(p.title) + '</a></h3>' +
+          '<p class="excerpt">' + escapeHtml(p.excerpt) + '</p>' +
+          '<div class="meta">📅 ' + escapeHtml(p.date) + ' &nbsp; ' + tags + '</div>' +
+        '</div>' +
+      '</article>';
+    }).join('');
+
+    if (filtered.length > 50){
+      html += '<p style="text-align:center;color:#64748b;font-size:.85rem;margin-top:14px;">Waxaa la tusay 50-ka ugu horeeya. Ku qor erey kale si aad u sii sifeyso.</p>';
+    }
+    results.innerHTML = html;
+  }
+
+  searchBox.addEventListener('input', function(){
+    query = this.value.trim().toLowerCase();
+    render();
+  });
+
+  tagFilters.addEventListener('click', function(e){
+    var chip = e.target.closest('.tag-chip');
+    if (!chip) return;
+    var tag = chip.dataset.tag;
+    if (activeTags.has(tag)){ activeTags.delete(tag); chip.classList.remove('active'); }
+    else { activeTags.add(tag); chip.classList.add('active'); }
+    render();
+  });
+
+  clearBtn.addEventListener('click', function(){
+    query = ''; activeTags.clear();
+    searchBox.value = '';
+    tagFilters.querySelectorAll('.tag-chip.active').forEach(function(c){ c.classList.remove('active'); });
+    render();
+  });
+
+  // Pre-select tag from URL hash (#tag=python)
+  var hash = window.location.hash.match(/tag=([^&]+)/);
+  if (hash){
+    var t = decodeURIComponent(hash[1]).toLowerCase();
+    var chip = tagFilters.querySelector('[data-tag="' + t + '"]');
+    if (chip){ activeTags.add(t); chip.classList.add('active'); }
+  }
+
+  render();
+})();
+</script>
