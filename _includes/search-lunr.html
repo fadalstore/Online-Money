@@ -1,6 +1,3 @@
-<script src="{{site.baseurl}}/assets/js/lunr.js"></script>
-
-
 <style>
     .lunrsearchresult .title {color: #d9230f;}
     .lunrsearchresult .url {color: silver;}
@@ -9,13 +6,28 @@
     .lunrsearchresult a:hover .title {text-decoration: underline;}
 </style>
 
-
-<form class="bd-search" onsubmit="return lunr_search(document.getElementById('lunrsearch').value);">
-    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+<form class="bd-search" onsubmit="return (typeof lunr_search === 'function') && lunr_search(document.getElementById('lunrsearch').value);">
+    <label for="lunrsearch" class="sr-only">Raadi maqaal</label>
+    <input type="search" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..." aria-label="Raadi maqaal" onfocus="window.__loadLunr && window.__loadLunr()"/>
 </form>
 
 <div id="lunrsearchresults">
     <ul></ul>
 </div>
 
-<script src="{{site.baseurl}}/assets/js/lunrsearchengine.js"></script>
+<script>
+(function(){
+  var loaded = false;
+  window.__loadLunr = function(){
+    if (loaded) return; loaded = true;
+    var s1 = document.createElement('script');
+    s1.src = '{{site.baseurl}}/assets/js/lunr.js';
+    s1.onload = function(){
+      var s2 = document.createElement('script');
+      s2.src = '{{site.baseurl}}/assets/js/lunrsearchengine.js';
+      document.body.appendChild(s2);
+    };
+    document.body.appendChild(s1);
+  };
+})();
+</script>
