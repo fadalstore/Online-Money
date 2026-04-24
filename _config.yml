@@ -9,7 +9,9 @@ url: "https://fadalstore.github.io" # Halkan ayaan ka saxnay .com
 production_url: "https://fadalstore.github.io"
 google_analytics: ''
 disqus: ''
-mailchimp-list: 'https://formspree.io/f/fadalstore@gmail.com'
+newsletter_endpoint: 'https://api.web3forms.com/submit'
+newsletter_access_key: 'a9d001ab-ee63-457c-914d-c666604abca3'
+mailchimp-list: 'https://api.web3forms.com/submit'
 include: ["_pages"]
 permalink: /:title.html
 

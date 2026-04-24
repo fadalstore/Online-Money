@@ -1,4 +1,4 @@
-{% if site.mailchimp-list %}
+{% if site.newsletter_endpoint and site.newsletter_access_key %}
 <section class="fs-newsletter" aria-labelledby="fs-newsletter-title">
   <div class="fs-news-inner">
     <div class="fs-news-icon">📬</div>
@@ -6,7 +6,11 @@
       <h3 id="fs-newsletter-title">Ku biir Newsletter-ka Fadal Store</h3>
       <p>Hel maqaallada ugu cusub, tababarrada bilaashka ah, iyo fursadaha ganacsiga online-ka — toos email-kaaga.</p>
     </div>
-    <form class="fs-news-form" data-action="{{ site.mailchimp-list }}" novalidate>
+    <form class="fs-news-form" data-action="{{ site.newsletter_endpoint }}" novalidate>
+      <input type="hidden" name="access_key" value="{{ site.newsletter_access_key }}">
+      <input type="hidden" name="subject" value="Newsletter signup — Fadal Store">
+      <input type="hidden" name="from_name" value="Fadal Store Newsletter">
+      <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
       <label for="fs-news-email" class="sr-only">Email address</label>
       <input type="email" id="fs-news-email" name="email" required placeholder="aragta@email.com" autocomplete="email">
       <button type="submit">Diiwaan-geli →</button>
@@ -42,9 +46,6 @@
 
 <script>
 (function(){
-  var form = document.currentScript.previousElementSibling;
-  while (form && form.tagName !== 'STYLE') form = form.previousElementSibling;
-  // Find the form (last newsletter on page)
   var forms = document.querySelectorAll('.fs-news-form:not([data-bound])');
   forms.forEach(function(f){
     f.setAttribute('data-bound', '1');
@@ -64,17 +65,24 @@
       btn.disabled = true;
       var orig = btn.textContent;
       btn.textContent = 'La diraya...';
+
+      var fd = new FormData(f);
+      var payload = {};
+      fd.forEach(function(v,k){ payload[k] = v; });
+
       fetch(f.dataset.action, {
         method: 'POST',
-        headers: {'Accept':'application/json'},
-        body: new FormData(f)
-      }).then(function(r){
-        if (r.ok){
+        headers: {'Content-Type':'application/json','Accept':'application/json'},
+        body: JSON.stringify(payload)
+      }).then(function(r){ return r.json().then(function(j){ return {ok:r.ok, body:j}; }); })
+      .then(function(res){
+        if (res.ok && res.body.success){
           msg.className = 'fs-news-msg success';
           msg.textContent = '✓ Mahadsanid! Si guul leh ayaad u diiwaan-gashay.';
           input.value = '';
         } else {
-          throw new Error('Submit failed');
+          msg.className = 'fs-news-msg error';
+          msg.textContent = (res.body && res.body.message) ? res.body.message : 'Khalad ayaa dhacay. Fadlan mar kale isku day.';
         }
       }).catch(function(){
         msg.className = 'fs-news-msg error';
@@ -87,5 +95,4 @@
   });
 })();
 </script>
-</section>
 {% endif %}
