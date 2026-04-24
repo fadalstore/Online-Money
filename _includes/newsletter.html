@@ -82,7 +82,12 @@
           input.value = '';
         } else {
           msg.className = 'fs-news-msg error';
-          msg.textContent = (res.body && res.body.message) ? res.body.message : 'Khalad ayaa dhacay. Fadlan mar kale isku day.';
+          var raw = (res.body && res.body.message) ? res.body.message : '';
+          if (/domain|TLD/i.test(raw)){
+            msg.textContent = 'Diiwaan-gelinta kama shaqayso bogga tijaabada. Fadlan tijaabi bogga rasmiga ah.';
+          } else {
+            msg.textContent = raw || 'Khalad ayaa dhacay. Fadlan mar kale isku day.';
+          }
         }
       }).catch(function(){
         msg.className = 'fs-news-msg error';
