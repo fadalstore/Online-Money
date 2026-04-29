@@ -488,9 +488,53 @@ ga('send', 'pageview');
 <script id="dsq-count-scr" src="//{{site.disqus}}.disqus.com/count.js"></script>
 {% endif %}
 
-<!-- Monetag Smart Tag -->
-<script>(function(s){s.dataset.zone='10755117',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-<!-- End Monetag -->
+	<!-- Monetag Smart Tag -->
+	<script>(function(s){s.dataset.zone='10755117',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+	<!-- End Monetag -->
+
+	<!-- Monetag Floating Button -->
+	<style>
+	.monetag-floating-btn {
+	    position: fixed;
+	    bottom: 25px;
+	    right: 25px;
+	    background: linear-gradient(135deg, #ff4b2b, #ff416c);
+	    color: #fff !important;
+	    padding: 12px 24px;
+	    border-radius: 50px;
+	    font-weight: 800;
+	    text-decoration: none !important;
+	    box-shadow: 0 10px 25px rgba(255, 75, 43, 0.4);
+	    z-index: 9999;
+	    display: flex;
+	    align-items: center;
+	    gap: 10px;
+	    transition: all 0.3s ease;
+	    animation: pulse-animation 2s infinite;
+	}
+	.monetag-floating-btn:hover {
+	    transform: translateY(-5px) scale(1.05);
+	    box-shadow: 0 15px 30px rgba(255, 75, 43, 0.6);
+	    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+	}
+	@keyframes pulse-animation {
+	    0% { box-shadow: 0 0 0 0 rgba(255, 75, 43, 0.7); }
+	    70% { box-shadow: 0 0 0 15px rgba(255, 75, 43, 0); }
+	    100% { box-shadow: 0 0 0 0 rgba(255, 75, 43, 0); }
+	}
+	@media (max-width: 768px) {
+	    .monetag-floating-btn {
+	        bottom: 20px;
+	        right: 20px;
+	        padding: 10px 20px;
+	        font-size: 0.9rem;
+	    }
+	}
+	</style>
+	<a href="https://omg10.com/4/10755133" target="_blank" rel="noopener" class="monetag-floating-btn">
+	    <span>🚀 Hel Fursad Lacag Sameyn Ah</span>
+	</a>
+	<!-- End Monetag Floating Button -->
 
 </body>
 </html>
